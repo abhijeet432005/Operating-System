@@ -41,7 +41,6 @@ A desktop-like operating system built entirely using **HTML, CSS, and JavaScript
 
 ## 📸 Screenshots
 
-_(optional - add actual images from your project folder)_
 
 | Desktop View                      | Wallpaper Switch               | Context Menu                     |
 | --------------------------------- | ------------------------------ | -------------------------------- |
