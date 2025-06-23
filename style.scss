@@ -30,12 +30,16 @@ img {
     pointer-events: none;
 }
 
+.small-screen{
+    display: none;
+}
 
 main {
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
     position: relative;
+    
 
     .back {
         width: 100%;
@@ -496,4 +500,29 @@ main {
 
 
 
+}
+
+
+
+@media (max-width: 1000px ) {
+    main{
+        display: none;
+
+    }
+    .small-screen{
+        color: black;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+        font-size: 4vw;
+        padding: 1rem;
+
+        img{
+            width: 8vw;
+        }
+    }
 }
