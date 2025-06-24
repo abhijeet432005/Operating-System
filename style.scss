@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 html,
@@ -329,12 +330,18 @@ main {
         width: 100%;
         bottom: 0;
         z-index: 2;
+        padding: 1rem;
 
 
         .task-bar {
             width: 100%;
             // position: relative;
             // background-color: rgba(255, 255, 255, 0.944);
+            background: hsl(0, 0%, 100%, 0.2);
+            backdrop-filter: blur(2px);
+            box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
+            border: 1px solid hsl(0, 0%, 100%, 0.3);
+            border-radius: 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -624,15 +631,15 @@ main {
     }
 
 
-
-
-
-
 }
 
 
 
 @media (max-width: 1000px) {
+
+    #overlay{
+        display: none;
+    }
     main {
         display: none;
 
