@@ -20,18 +20,20 @@ img {
      object-fit: cover;
 }
 
-#display {
-  background-color: rgba(0, 0, 0, 0.399);
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-}
-
 .small-screen {
   display: none;
+}
+
+#overlay {
+  background-color: rgba(0, 0, 0, 0.437);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.6;
+  z-index: 1;
 }
 
 main {
@@ -39,18 +41,50 @@ main {
   min-height: 100vh;
   overflow: hidden;
   position: relative;
+  background-color: black;
 }
 main .back {
   width: 100%;
   height: 100%;
   position: absolute;
-  z-index: -1;
 }
 main .top {
   width: 100%;
   height: 100vh;
   padding: 1rem;
   position: relative;
+}
+main .top .Date-Time {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+main .top .Date-Time h1 {
+  font-size: 1.25rem;
+  font-weight: normal;
+  letter-spacing: 0.1rem;
+}
+main .top .Date-Time ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: hsla(0, 0%, 100%, 0.2);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
+  border: 1px solid hsla(0, 0%, 100%, 0.8);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+main .top .Date-Time ul li {
+  background: hsla(0, 0%, 100%, 0.2);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
+  border: 1px solid hsla(0, 0%, 100%, 0.8);
+  border-radius: 1rem;
+  padding: 1rem;
+  list-style: none;
 }
 main .top .folder {
   display: flex;
@@ -59,11 +93,14 @@ main .top .folder {
   align-items: center;
   position: absolute;
   text-align: center;
+  z-index: 1;
 }
 main .top .folder img {
   width: 3rem;
 }
-main .top .folder-window, main .top .terminal {
+main .top .folder-window,
+main .top .terminal,
+main .top .wallpaper-window {
   display: flex;
   flex-direction: column;
   width: 40rem;
@@ -75,7 +112,9 @@ main .top .folder-window, main .top .terminal {
   resize: both;
   overflow: hidden;
 }
-main .top .folder-window .upper, main .top .terminal .upper {
+main .top .folder-window .upper,
+main .top .terminal .upper,
+main .top .wallpaper-window .upper {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -91,14 +130,25 @@ main .top .folder-window .upper, main .top .terminal .upper {
      -moz-user-select: none;
           user-select: none;
 }
-main .top .folder-window .upper img, main .top .terminal .upper img {
+main .top .folder-window .upper img,
+main .top .terminal .upper img,
+main .top .wallpaper-window .upper img {
   width: 1rem;
   cursor: pointer;
 }
-main .top .folder-window .upper:active, main .top .terminal .upper:active {
+main .top .folder-window .upper .right,
+main .top .terminal .upper .right,
+main .top .wallpaper-window .upper .right {
+  cursor: pointer;
+}
+main .top .folder-window .upper:active,
+main .top .terminal .upper:active,
+main .top .wallpaper-window .upper:active {
   cursor: grabbing;
 }
-main .top .folder-window .lower, main .top .terminal .lower {
+main .top .folder-window .lower,
+main .top .terminal .lower,
+main .top .wallpaper-window .lower {
   width: 100%;
   height: 100%;
   background: hsla(0, 0%, 100%, 0.2);
@@ -113,7 +163,7 @@ main .top .folder-window .lower, main .top .terminal .lower {
 main .top .calculator {
   min-width: 17rem;
   min-height: 27rem;
-  background: hsla(0, 0%, 100%, 0.2);
+  background: hsla(0, 0%, 100%, 0.3);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   border: 1px solid hsla(0, 0%, 100%, 0.8);
@@ -185,6 +235,46 @@ main .top .terminal .lower {
   justify-content: flex-start;
   background: hsla(0, 0%, 100%, 0.5);
 }
+main .top .wallpaper-window {
+  min-width: 50rem;
+  min-height: 30rem;
+  /* Track */
+  /* Handle */
+}
+main .top .wallpaper-window .lower {
+  width: 100%;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  resize: both;
+  overflow: auto;
+  /* width */
+}
+main .top .wallpaper-window .lower .card {
+  width: 18rem;
+  height: 10rem;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+main .top .wallpaper-window .lower::-webkit-scrollbar {
+  width: 8px;
+}
+main .top .wallpaper-window .lower::-webkit-scrollbar-track {
+  background: hsla(0, 0%, 100%, 0.1);
+}
+main .top .wallpaper-window .lower::-webkit-scrollbar-thumb {
+  background: hsla(0, 0%, 100%, 0.5);
+  border-radius: 1rem;
+}
 main .bottom {
   position: absolute;
   width: 100%;
@@ -227,9 +317,20 @@ main .bottom .task-bar .menu img,
 main .bottom .task-bar .weather img {
   width: 2rem;
 }
-main .bottom .task-bar .menu img,
+main .bottom .task-bar .menu i {
+  font-size: 1.1rem;
+}
 main .bottom .task-bar .weather img {
   width: 1.2rem;
+}
+main .bottom .task-bar .apps {
+  transition: all ease 0.9s;
+}
+main .bottom .task-bar .apps ul li:hover {
+  scale: 1.1;
+}
+main .bottom .task-bar .apps li:active {
+  scale: 0.9;
 }
 main .menu-expand {
   position: absolute;
@@ -243,8 +344,8 @@ main .menu-expand {
   box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
   border: 1px solid hsla(0, 0%, 100%, 0.3);
   transition: 0.5s all ease;
-  opacity: 0;
-  z-index: 2;
+  z-index: 99;
+  display: none;
 }
 main .menu-expand .expand .taskBar {
   padding: 1rem;

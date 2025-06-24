@@ -6,29 +6,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
 </head>
 
 <body>
 
 
-    <div id="display"></div>
+    
+    
+
     <div class="small-screen">
         <h1>Please switch to a bigger screen to use this operating system UI.</h1>
         <img src="./Assets/monitor.png" alt="">
     </div>
+    <div id="overlay"></div>
     
     <main>
+        <img class="back" src="./Assets/wal9.jpg" alt="" srcset="">
         
-        
-        <img class="back" src="./Assets/5818574-2560x1600-desktop-hd-laptop-wallpaper.jpg" alt="" srcset="">
+           
 
         <div class="top">
-            <!-- <div class="folder">
-                <img src="./folder.png" alt="">
-                <span>New folder</span>
-            </div> -->
 
-            <div class="folder-window">
+            <div class="Date-Time">
+                <ul>
+                    <li><h1 id="current-time"></h1></li>
+                    <li><h1 id="current-Date"></h1></li>
+                </ul>
+            </div>
+
+            <div class="wallpaper-window window">
+                <div class="upper">
+
+                    <div class="left">
+
+                        <img src="./Assets/images.png" alt="">
+                    </div>
+
+                    <div class="right">
+                        <img src="./Assets/minimize-sign.png" alt="">
+                        <img src="./Assets/layers.png" alt="">
+                        <img class="close" src="./Assets/close.png" alt="">
+                    </div>
+
+                </div>
+                <div class="lower">
+
+                    <div class="card card1">
+                        <img src="./Assets/5818574-2560x1600-desktop-hd-laptop-wallpaper.jpg" alt="">
+                    </div>
+
+                    <div class="card card2">
+                        <img src="./Assets/earth.jpg" alt="">
+                    </div>
+
+                    <div class="card card3">
+                        <img src="./Assets/spider.jpg" alt="">
+                    </div>
+
+                    <div class="card card4">
+                        <img src="./Assets/monster.jpg" alt="">
+                    </div>
+                    <div class="card card4">
+                        <img src="./Assets/rog.jpg" alt="">
+                    </div>
+                    <div class="card card5">
+                        <img src="./Assets/wal5.jpg" alt="">
+                    </div>
+                    <div class="card card6">
+                        <img src="./Assets/wal6.jpg" alt="">
+                    </div>
+                    <div class="card card7">
+                        <img src="./Assets/wal7.jpg" alt="">
+                    </div>
+                    <div class="card card8">
+                        <img src="./Assets/wal8.jpg" alt="">
+                    </div>
+                    <div class="card card9">
+                        <img src="./Assets/wal9.jpg" alt="">
+                    </div>
+                    <div class="card card10">
+                        <img src="./Assets/wal10.jpg" alt="">
+                    </div>
+                    <div class="card card11">
+                        <img src="./Assets/wal11.jpg" alt="">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="folder-window window">
                 <div class="upper">
 
                     <div class="left">
@@ -48,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="calculator">
+            <div class="calculator window">
                 <div class="upper">
                     <div class="left">
                         <img src="./Assets/calculator.png" alt="">
@@ -68,11 +138,11 @@
                             <input type="text" name="display">
                         </div>
                         <div>
-                            <input type="button" value="AC" onclick="display.value = '' ">
-                            <input type="button" value="DE"
+                            <input style="color: rgb(0, 131, 0);" type="button" value="AC" onclick="display.value = '' ">
+                            <input style="color: green;" type="button" value="DE"
                                 onclick="display.value = display.value.toString().slice(0,-1) ">
-                            <input type="button" value="." onclick="display.value += '.' ">
-                            <input type="button" value="/" onclick="display.value += '/' ">
+                            <input style="color: rgb(255, 13, 0); font-weight: bolder;" type="button" value="." onclick="display.value += '.' ">
+                            <input style="color: green;" type="button" value="/" onclick="display.value += '/' ">
                         </div>
                         <div>
                             <input type="button" value="7" onclick="display.value += '7' ">
@@ -101,7 +171,7 @@
                 </div>
             </div>
 
-            <div class="terminal">
+            <div class="terminal window">
                 <div class="upper">
 
                     <div class="left">
@@ -117,11 +187,15 @@
 
                 </div>
                 <div class="lower">
-                    <p>Microsoft Windows [Version 10.0.26100.4351] <br>
-                        (c) Microsoft Corporation. All rights reserved. <br><br>
+                    <p><span style="color: green;">Microsoft Windows [Version 10.0.26100.4351] <br>
+                        (c) Microsoft Corporation. All rights reserved. </span><br><br>
 
-                        C:\Users\ADMIN></p>
+                        <span style="color: red;">C:\Users\ADMIN></span></p>
                 </div>
+            </div>
+
+            <div class="system-window .window">
+
             </div>
         </div>
 
@@ -132,7 +206,11 @@
                         <li>
                             <img src="./Assets/cloudy.png" alt="" srcset="">
                             26.8°C
+
+                            
                         </li>
+
+                        
                     </ul>
                 </div>
 
@@ -151,8 +229,10 @@
 
                     <div class="icon">
                         <ul>
-                            <li><img src="./Assets/bluetooth.png" alt="" srcset=""></li>
-                            <li><img src="./Assets/wi-fi-icon.png" alt="" srcset=""></li>
+                            <li><i class="ri-battery-fill"></i></li>
+                            <li><i class="ri-bluetooth-line"></i></li>
+
+                            <li><i class="ri-wifi-line"></i></li>
                         </ul>
 
                     </div>
@@ -188,7 +268,7 @@
 
                         <div class="box">
                             <div class="line"></div>
-                            <input type="range" class="input_range" min="0" max="100" value="0">
+                            <input type="range" class="input_range" min="0" max="100" value="60">
                         </div>
                         <p class="number">0</p>
 

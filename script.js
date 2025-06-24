@@ -1,33 +1,64 @@
-function wallpaper() {
+function DateTime(){
+    let currentTime  = document.querySelector("#current-time")
+    let currentDate  = document.querySelector("#current-Date")
 
-    let images = ["Assets/earth.jpg", "Assets/spider.jpg", "Assets/rog.jpg", "Assets/monster.jpg"]
+    function UpdateTime(){
+        let date = new Date()
+        currentTime.innerHTML = date.toLocaleTimeString()
+    }
 
-    let wallpaper = document.querySelector("#wallpaper")
-    let background = document.querySelector(".back")
-    let change = document.querySelector("#Change")
-
-    wallpaper.addEventListener('click', () => {
-        let value = Math.floor(Math.random() * images.length)
-        let random = images[value]
-        console.log(random)
-
-        background.setAttribute("src", random)
-
-    })
-
-
-    change.addEventListener('click', () => {
-        let value = Math.floor(Math.random() * images.length)
-        let random = images[value]
-        console.log(random)
-        background.setAttribute("src", random)
-
-    })
+    UpdateTime()
+    setInterval(UpdateTime, 1000)
+    
+    let date = new Date()
+    currentDate.innerHTML = date.toLocaleDateString()
 
 }
 
-wallpaper()
+DateTime()
 
+function ManagesZindexOfWindow(){
+    
+    let zIndexCounter = 10;
+    
+    function bringToFront(elem){
+        zIndexCounter++;
+        elem.style.zIndex = zIndexCounter
+    }
+    
+    function WindowZindex(){
+        let allWindow = document.querySelectorAll(".window")
+    
+        allWindow.forEach(elem => {
+            elem.addEventListener("mousedown", () => bringToFront(elem))
+        })
+    }
+    
+    WindowZindex()
+}
+
+ManagesZindexOfWindow()
+
+function changeWallpaper(){
+    let wallpaper = document.querySelectorAll(".card")
+    let background = document.querySelector(".back")
+
+    wallpaper.forEach(elem => {
+        elem.addEventListener('click', () => {
+        //    let img = elem.querySelector("img").getAttribute('src')
+           let img = elem.childNodes[1].getAttribute('src')
+           background.setAttribute('src', img)
+        })
+    })
+}
+
+changeWallpaper()
+let openWallpaperIcon = document.querySelector("#wallpaper");
+let change = document.querySelector("#Change")
+let WallpaperWindow = document.querySelector(".wallpaper-window")
+OpenClose(openWallpaperIcon, WallpaperWindow)
+OpenClose(change, WallpaperWindow)
+DragDrop(WallpaperWindow)
 
 function DragDrop(element) {
     let header = element.querySelector(".upper")
@@ -125,13 +156,14 @@ Delete()
 function OpenClose(element, window) {
     element.addEventListener('click', () => {
         window.style.display = 'block'
+        ManagesZindexOfWindow()
     })
 
     let close = document.querySelectorAll(".close")
 
     close.forEach(elem => {
         elem.addEventListener('click', () => {
-            let parentWindow = elem.closest('.terminal, .calculator');
+            let parentWindow = elem.closest('.terminal, .calculator, .wallpaper-window');
             console.log(parentWindow)
             if (parentWindow) {
                 parentWindow.style.display = 'none';
@@ -139,6 +171,7 @@ function OpenClose(element, window) {
         });
     });
 }
+
 
 
 
@@ -152,17 +185,17 @@ function menuExpansion() {
         e.stopPropagation(); // prevent bubbling to document
 
         if (flag === 0) {
-            menuExpand.style.opacity = 1;
+            menuExpand.style.display ='block'
             flag = 1;
         } else {
-            menuExpand.style.opacity = 0;
+            menuExpand.style.display ='none'
             flag = 0;
         }
     });
 
     // Close when clicking outside
     document.addEventListener("click", () => {
-        menuExpand.style.opacity = 0;
+        menuExpand.style.display = 'none';
         flag = 0;
     });
 
@@ -223,26 +256,26 @@ controlMenu()
 
 
 function BrightnessControl() {
-
     let input_range = document.querySelector(".brightness .input_range")
 
     input_range.addEventListener('input', () => {
-        let value = input_range.value
+        let value = input_range.value;
 
-        let number = document.querySelector(".brightness .number")
-        let line = document.querySelector('.brightness .line')
+        let number = document.querySelector(".brightness .number");
+        let line = document.querySelector('.brightness .line');
 
-        number.innerHTML = value
-        line.style.width = `${value}%`
+        number.innerHTML = value;
+        line.style.width = `${value}%`;
 
-
-
-        let display = document.querySelector("#display")
-
-        let opacity = (value / 100)
-        display.style.opacity = opacity
-    })
+        let overlay = document.querySelector("#overlay");
+        
+        let level = 1 - (value / 100);  
+        overlay.style.opacity = level
+    });
 }
+
+BrightnessControl();
+
 
 BrightnessControl()
 
@@ -298,6 +331,7 @@ function folderOpenClose(folder) {
     folder.addEventListener("dblclick", () => {
         // open.style.opacity = 1
         open.style.display = 'block'
+        ManagesZindexOfWindow()
     })
 
 
@@ -313,36 +347,14 @@ const folderWindow = document.querySelector(".folder-window");
 DragDrop(folderWindow);
 
 
-// function CloseOpenCalculator() {
-
-
-
-//     open.addEventListener('click', () => {
-//         calculator.style.display = "block"
-//     })
-
-//     let close = document.querySelector(".closeCal");
-//     if (close) {
-//         close.addEventListener("click", () => {
-//             calculator.style.display = 'none'
-//         });
-//     }
-// }
-
-// CloseOpenCalculator()
-
 
 let openCal = document.querySelector("#calculator")
 let calculator = document.querySelector(".calculator")
-
 OpenClose(openCal, calculator)
-
 
 
 const CalculatorWindow = document.querySelector(".calculator");
 DragDrop(CalculatorWindow)
-
-
 
 
 let openTerminalByMenu = document.querySelector("#Terminal")

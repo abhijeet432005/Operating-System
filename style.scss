@@ -19,33 +19,41 @@ img {
     object-fit: cover;
 }
 
-#display {
-    background-color: rgba(0, 0, 0, 0.399);
-    opacity: 0;
-    // filter: brightness(1);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 1;
-    pointer-events: none;
-}
 
-.small-screen{
+
+.small-screen {
     display: none;
 }
+
+#overlay {
+    background-color: rgba(0, 0, 0, 0.437);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.6;
+    z-index: 1;
+
+}
+
+
+
 
 main {
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
     position: relative;
-    
+    background-color: black;
+
 
     .back {
         width: 100%;
         height: 100%;
         position: absolute;
-        z-index: -1;
+        // z-index: -1;
     }
 
     .top {
@@ -53,6 +61,40 @@ main {
         height: 100vh;
         padding: 1rem;
         position: relative;
+
+        .Date-Time {
+            // width: fit-content;
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem;
+            
+            h1 {
+                font-size: 1.25rem;
+                font-weight: normal;
+                letter-spacing: 0.1rem;
+            }
+            
+            ul{
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                background: hsl(0, 0%, 100%, 0.2);
+                backdrop-filter: blur(2px);
+                box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
+                border: 1px solid hsl(0, 0%, 100%, 0.8);
+                padding: 1rem;
+                border-radius: 1rem;
+                li{
+                    background: hsl(0, 0%, 100%, 0.2);
+                    backdrop-filter: blur(2px);
+                    box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
+                    border: 1px solid hsl(0, 0%, 100%, 0.8);
+                    border-radius: 1rem;
+                    padding: 1rem;
+                    list-style: none;
+                }
+            }
+        }
 
         .folder {
             // width: 100%;
@@ -63,14 +105,19 @@ main {
             align-items: center;
             position: absolute;
             text-align: center;
-            
+            z-index: 1;
+
 
             img {
                 width: 3rem;
             }
         }
 
-        .folder-window, .terminal {
+
+
+        .folder-window,
+        .terminal,
+        .wallpaper-window {
             display: flex;
             flex-direction: column;
             width: 40rem;
@@ -82,7 +129,7 @@ main {
             left: 100px;
             resize: both;
             overflow: hidden;
-            
+
             .upper {
                 width: 100%;
                 display: flex;
@@ -98,6 +145,10 @@ main {
 
                 img {
                     width: 1rem;
+                    cursor: pointer;
+                }
+
+                .right {
                     cursor: pointer;
                 }
             }
@@ -116,13 +167,14 @@ main {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
             }
         }
 
         .calculator {
             min-width: 17rem;
             min-height: 27rem;
-            background: hsl(0, 0%, 100%, 0.2);
+            background: hsl(0, 0%, 100%, 0.3);
             backdrop-filter: blur(2px);
             // box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0153);
             border: 1px solid hsl(0, 0%, 100%, 0.8);
@@ -137,9 +189,10 @@ main {
             overflow: hidden;
             max-width: 20rem;
             max-height: 30rem;
+            // z-index: 9;
 
 
-            .upper{
+            .upper {
                 width: 100%;
                 display: flex;
                 align-items: center;
@@ -147,40 +200,42 @@ main {
                 padding: 0 0.5rem;
                 cursor: grab;
 
-                
-                
+
+
                 img {
                     width: 1rem;
                     cursor: pointer;
                     // z-index: 9;
                 }
             }
-            .upper:active{
+
+            .upper:active {
                 cursor: grabbing;
             }
 
-            .bottom{
+            .bottom {
                 width: 100%;
-                
-                
-                .display{
+
+
+                .display {
                     display: flex;
                     justify-content: flex-end;
                     margin: 0.5rem 0;
-                    input{
+
+                    input {
                         text-align: right;
                         flex: 1;
                         font-size: 1.5rem;
-                        
+
                     }
                 }
 
-                form{
+                form {
                     width: 100%;
                     height: 100%;
                     // margin-top: 2rem;
 
-                    input{
+                    input {
                         min-width: 3rem;
                         min-height: 3rem;
                         outline: 0;
@@ -192,31 +247,78 @@ main {
                         // cursor: pointer;
                         margin: 0.5rem;
                         font-size: 1rem;
-                        
+
                     }
                 }
 
-                .equal{
+                .equal {
                     width: 7.2rem;
                     color: red;
                 }
             }
-            
+
         }
 
-        .terminal{
-
+        .terminal {
             .upper {
                 background: hsl(0, 0%, 100%, 0.4);
             }
 
-            .lower{
+            .lower {
                 display: flex;
                 align-items: flex-start;
                 justify-content: flex-start;
                 background: hsl(0, 0%, 100%, 0.5);
             }
         }
+
+        .wallpaper-window {
+            min-width: 50rem;
+            min-height: 30rem;
+
+
+            .lower {
+                width: 100%;
+                padding: 2rem;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, 300px);
+                gap: 1rem;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                resize: both;
+                overflow: auto;
+
+                .card {
+                    width: 18rem;
+                    height: 10rem;
+                    background-color: red;
+                    display: flex;
+                    justify-content: center;
+                    object-fit: cover;
+                    border-radius: 1rem;
+                    overflow: hidden;
+                }
+
+                /* width */
+            }
+
+            .lower::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            /* Track */
+            .lower::-webkit-scrollbar-track {
+                background: hsl(0, 0%, 100%, 0.1);
+            }
+
+            /* Handle */
+            .lower::-webkit-scrollbar-thumb {
+                background: hsl(0, 0%, 100%, 0.5);
+                border-radius: 1rem;
+            }
+        }
+
     }
 
 
@@ -265,14 +367,41 @@ main {
                 }
             }
 
-            .menu,
-            .weather {
-                img {
-                    width: 1.2rem;
+            .menu {
+                i {
+                    font-size: 1.1rem;
                 }
             }
 
+            .weather {
 
+                img {
+                    width: 1.2rem;
+                }
+
+
+            }
+
+            .apps {
+                
+                transition: all ease 0.9s;
+
+
+                ul {
+
+                    li {
+                    }
+
+
+                    li:hover {
+                        scale: 1.1;
+                    }
+
+                }
+                li:active {
+                    scale: 0.9;
+                }
+            }
 
         }
 
@@ -290,9 +419,8 @@ main {
         box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
         border: 1px solid hsl(0, 0%, 100%, 0.3);
         transition: 0.5s all ease;
-        opacity: 0;
-        z-index: 2;
-
+        z-index: 99;
+        display: none;
 
         .expand {
             .taskBar {
@@ -437,7 +565,7 @@ main {
     }
 
 
-    .control-menu{
+    .control-menu {
         border-radius: 0.5rem;
         padding: 1rem;
         padding-top: 0rem;
@@ -495,7 +623,7 @@ main {
         }
     }
 
-    
+
 
 
 
@@ -504,12 +632,13 @@ main {
 
 
 
-@media (max-width: 1000px ) {
-    main{
+@media (max-width: 1000px) {
+    main {
         display: none;
 
     }
-    .small-screen{
+
+    .small-screen {
         color: black;
         display: block;
         position: absolute;
@@ -521,7 +650,7 @@ main {
         font-size: 4vw;
         padding: 1rem;
 
-        img{
+        img {
             width: 8vw;
         }
     }
