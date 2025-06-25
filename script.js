@@ -17,6 +17,77 @@ function DateTime(){
 
 DateTime()
 
+function Calendar() {
+    const monthYear = document.getElementById("month-year")
+    const daysContainer = document.getElementById("days")
+    const prevBtn = document.getElementById("prev")
+    const nextBtn = document.getElementById("next")
+
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    let currentDate = new Date()
+    const today = new Date()
+
+    function renderCalendar(date) {
+        const year = date.getFullYear()
+        const month = date.getMonth()
+
+        const firstDayIndex = new Date(year, month, 1).getDay()
+        console.log(firstDayIndex)
+        const daysInMonth = new Date(year, month + 1, 0).getDate()
+        console.log(daysInMonth)
+
+        monthYear.innerHTML = `${months[month]} ${year}`
+        daysContainer.innerHTML = ""
+
+        
+        for (let i = 0; i < firstDayIndex; i++) {
+            const emptyDiv = document.createElement("div")
+            emptyDiv.classList.add("empty")
+            daysContainer.appendChild(emptyDiv)
+        }
+
+        
+        for (let i = 1; i <= daysInMonth; i++) {
+            const dayDiv = document.createElement("div")
+            dayDiv.innerHTML = i
+
+            if (
+                i === today.getDate() &&
+                month === today.getMonth() &&
+                year === today.getFullYear()
+            ) {
+                dayDiv.classList.add("today")
+            }
+
+            daysContainer.appendChild(dayDiv)
+        }
+    }
+
+    // Prev/Next Button Handlers
+    prevBtn.addEventListener("click", () => {
+        currentDate.setMonth(currentDate.getMonth() - 1)
+        renderCalendar(currentDate)
+    })
+
+    nextBtn.addEventListener("click", () => {
+        currentDate.setMonth(currentDate.getMonth() + 1)
+        renderCalendar(currentDate)
+    })
+
+    renderCalendar(currentDate)
+}
+
+Calendar()  
+let CalendarWindow = document.querySelector(".calender-window")
+let openCalender = document.querySelector("#calander")
+DragDrop(CalendarWindow)
+OpenClose(openCalender, CalendarWindow)
+
+
 function ManagesZindexOfWindow(){
     
     let zIndexCounter = 10;
@@ -163,7 +234,7 @@ function OpenClose(element, window) {
 
     close.forEach(elem => {
         elem.addEventListener('click', () => {
-            let parentWindow = elem.closest('.terminal, .calculator, .wallpaper-window');
+            let parentWindow = elem.closest('.terminal, .calculator, .wallpaper-window, .calender-window');
             console.log(parentWindow)
             if (parentWindow) {
                 parentWindow.style.display = 'none';
@@ -240,7 +311,7 @@ function MainMenuApplication(){
 
     const windows = [
         document.querySelector(".calculator"),       // id="0"
-        document.querySelector(".wallpaper-window"),// id="1"
+        document.querySelector(".wallpaper-window"), // id="1"
         null,                                        // id="2" (LinkedIn)
         null,                                        // id="3" (Weather)
         null,                                        // id="4" (Camera)
@@ -251,7 +322,7 @@ function MainMenuApplication(){
         null,                                        // id="9" (Music)
         null,                                        // id="10" (Code Editor)
         null,                                        // id="11" (WhatsApp)
-        null                                         // id="12" (Calendar)
+        document.querySelector(".calender-window")   // id="12" (Calendar)
     ];
 
     apps.forEach((elem, idx) => {
