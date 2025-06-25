@@ -34,7 +34,7 @@ img {
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0.6;
+    opacity: 0;
     z-index: 1;
 
 }
@@ -62,20 +62,22 @@ main {
         height: 100vh;
         padding: 1rem;
         position: relative;
+        // overflow: hidden;
+        padding: 1rem;
 
         .Date-Time {
             // width: fit-content;
             display: flex;
             justify-content: flex-end;
             padding: 1rem;
-            
+
             h1 {
                 font-size: 1.25rem;
                 font-weight: normal;
                 letter-spacing: 0.1rem;
             }
-            
-            ul{
+
+            ul {
                 display: flex;
                 flex-direction: column;
                 gap: 0.5rem;
@@ -85,7 +87,8 @@ main {
                 border: 1px solid hsl(0, 0%, 100%, 0.8);
                 padding: 1rem;
                 border-radius: 1rem;
-                li{
+
+                li {
                     background: hsl(0, 0%, 100%, 0.2);
                     backdrop-filter: blur(2px);
                     box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
@@ -98,23 +101,22 @@ main {
         }
 
         .folder {
-            // width: 100%;
-            // height: 100%;
+            width: fit-content;
+            height: fit-content;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             position: absolute;
             text-align: center;
+            top: 0;
+            left: 0;
             z-index: 1;
-
 
             img {
                 width: 3rem;
             }
         }
-
-
 
         .folder-window,
         .terminal,
@@ -125,11 +127,12 @@ main {
             height: 30rem;
             // opacity: 0;
             display: none;
-            position: absolute;
+            position: fixed;
             top: 100px;
             left: 100px;
             resize: both;
             overflow: hidden;
+            z-index: 1;
 
             .upper {
                 width: 100%;
@@ -190,7 +193,7 @@ main {
             overflow: hidden;
             max-width: 20rem;
             max-height: 30rem;
-            // z-index: 9;
+            z-index: 1;
 
 
             .upper {
@@ -320,6 +323,52 @@ main {
             }
         }
 
+        .main-menu-window{
+            width: 50vw;
+            height: 70vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: hsl(0, 0%, 100%, 0.3);
+            border-radius: 2rem;
+            padding: 1rem;
+            z-index: 999;
+            display: none;
+
+            .apps{
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, 90px);
+                justify-content: center;
+                // grid-template-columns: repeat(auto-fit, 130px);
+                
+                .app{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 1rem;
+
+                    p{
+                        text-transform: capitalize;
+                        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                        white-space: nowrap;
+                    }
+
+                }
+                .app:hover{
+                    scale: 1.05;
+                }
+                .app:active{
+                    scale: 0.98;
+                }
+            }
+
+            img{
+                width: 2rem;
+            }
+        }
     }
 
 
@@ -328,20 +377,21 @@ main {
     .bottom {
         position: absolute;
         width: 100%;
+        // height: 10vh;
         bottom: 0;
-        z-index: 2;
-        padding: 1rem;
+        z-index: 9999;
+        // padding: 1rem;
 
 
         .task-bar {
             width: 100%;
             // position: relative;
             // background-color: rgba(255, 255, 255, 0.944);
-            background: hsl(0, 0%, 100%, 0.2);
-            backdrop-filter: blur(2px);
-            box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
-            border: 1px solid hsl(0, 0%, 100%, 0.3);
-            border-radius: 2rem;
+            // background: hsl(0, 0%, 100%, 0.2);
+            // backdrop-filter: blur(2px);
+            // box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
+            // border: 1px solid hsl(0, 0%, 100%, 0.3);
+            // border-radius: 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -390,26 +440,32 @@ main {
             }
 
             .apps {
-                
+
                 transition: all ease 0.9s;
 
 
                 ul {
 
-                    li {
-                    }
+                    li {}
 
 
                     li:hover {
                         scale: 1.1;
                     }
 
+                    li:active {
+                        scale: 0.98;
+                    }
                 }
-                li:active {
-                    scale: 0.9;
+
+
+                #main-menu {
+
+                    img{
+                        width: 1.9rem;
+                    }
                 }
             }
-
         }
 
 
@@ -637,9 +693,10 @@ main {
 
 @media (max-width: 1000px) {
 
-    #overlay{
+    #overlay {
         display: none;
     }
+
     main {
         display: none;
 

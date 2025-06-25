@@ -207,6 +207,68 @@ function menuExpansion() {
 
 menuExpansion()
 
+function AppMainMenu(){
+    let mainMenu = document.querySelector("#main-menu") 
+    let mainMenuWindow = document.querySelector(".main-menu-window")
+    let flag = 0;
+
+    mainMenu.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        if(flag === 0){
+            mainMenuWindow.style.display = "block"
+            flag = 1
+        }
+
+        else{
+            mainMenuWindow.style.display = 'none'
+            flag = 0
+        }
+
+    })
+
+    document.addEventListener("click", () => {
+        mainMenuWindow.style.display = 'none'
+        flag = 0
+    })
+}
+
+AppMainMenu()
+
+function MainMenuApplication(){
+    let apps = document.querySelectorAll(".app")
+
+    const windows = [
+        document.querySelector(".calculator"),       // id="0"
+        document.querySelector(".wallpaper-window"),// id="1"
+        null,                                        // id="2" (LinkedIn)
+        null,                                        // id="3" (Weather)
+        null,                                        // id="4" (Camera)
+        document.querySelector(".terminal"),        // id="5"
+        document.querySelector(".folder-window"),   // id="6" (Notes)
+        null,                                        // id="7" (Map)
+        null,                                        // id="8" (Chrome)
+        null,                                        // id="9" (Music)
+        null,                                        // id="10" (Code Editor)
+        null,                                        // id="11" (WhatsApp)
+        null                                         // id="12" (Calendar)
+    ];
+
+    apps.forEach((elem, idx) => {
+        elem.addEventListener("click" ,() => {
+            let win = windows[idx]
+            console.log(win, idx)
+
+            if(win){
+                win.style.display = "block";
+                ManagesZindexOfWindow(win)
+            }
+        })
+    })
+}
+
+MainMenuApplication()
+
 function TaskBarSwitchOnOF() {
     let taskBar = document.querySelectorAll(".taskBar .img")
 
@@ -257,17 +319,24 @@ controlMenu()
 
 function BrightnessControl() {
     let input_range = document.querySelector(".brightness .input_range")
+    let number = document.querySelector(".brightness .number");
+    let line = document.querySelector('.brightness .line');
+    let overlay = document.querySelector("#overlay");
+
+    // Default value
+    let DefaultValue = 60;
+    input_range.value = DefaultValue;
+    number.innerHTML = DefaultValue
+    line.style.width = `${DefaultValue}%`
+    overlay.style.opacity = (1 - (DefaultValue / 100))
 
     input_range.addEventListener('input', () => {
         let value = input_range.value;
 
-        let number = document.querySelector(".brightness .number");
-        let line = document.querySelector('.brightness .line');
 
         number.innerHTML = value;
         line.style.width = `${value}%`;
 
-        let overlay = document.querySelector("#overlay");
         
         let level = 1 - (value / 100);  
         overlay.style.opacity = level
