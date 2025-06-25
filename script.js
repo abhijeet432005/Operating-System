@@ -187,7 +187,7 @@ function IconDraggable(Icon) {
     Icon.ondragstart = () => false
 }
 
-
+let currentRightClickedFolder = null;
 function IconMenu(element) {
     let menu = document.querySelector(".folder-menu")
 
@@ -221,6 +221,7 @@ function Delete() {
         }
     });
 }
+
 Delete()
 
 

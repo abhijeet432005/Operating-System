@@ -331,7 +331,10 @@ main {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: hsl(0, 0%, 100%, 0.3);
+            background-color: hsl(0, 0%, 100%, 0.5);
+            backdrop-filter: blur(12px);
+            box-shadow: inset 0 0 8px 1px hsla(0, 0%, 100%, 0.153);
+            color: black;
             border-radius: 2rem;
             padding: 1rem;
             z-index: 999;
