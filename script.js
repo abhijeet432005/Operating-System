@@ -235,7 +235,7 @@ function OpenClose(element, window) {
 
     close.forEach(elem => {
         elem.addEventListener('click', () => {
-            let parentWindow = elem.closest('.terminal, .calculator, .wallpaper-window, .calender-window');
+            let parentWindow = elem.closest('.terminal, .calculator, .wallpaper-window, .calender-window, .notes-window');
             console.log(parentWindow)
             if (parentWindow) {
                 parentWindow.style.display = 'none';
@@ -317,7 +317,7 @@ function MainMenuApplication(){
         null,                                        // id="3" (Weather)
         null,                                        // id="4" (Camera)
         document.querySelector(".terminal"),        // id="5"
-        document.querySelector(".folder-window"),   // id="6" (Notes)
+        document.querySelector(".notes-window"),   // id="6" (Notes)
         null,                                        // id="7" (Map)
         null,                                        // id="8" (Chrome)
         null,                                        // id="9" (Music)
@@ -502,3 +502,60 @@ let openTerminalByMenu = document.querySelector("#Terminal")
 let Terminal = document.querySelector(".terminal")
 OpenClose(openTerminalByMenu, Terminal)
 DragDrop(Terminal)
+
+
+let color = document.getElementById("color");
+let createBtn = document.getElementById("createBtn")
+let list = document.getElementById("list")
+
+createBtn.addEventListener("click", () => {
+    let newNote = document.createElement('div')
+    newNote.classList.add('note');
+    newNote.innerHTML = `
+    <span class="exit">X</span>
+                                <textarea placeholder="Write-content..." rows="10" cols="30"></textarea>
+    `
+    newNote.style.position = "absolute"
+    newNote.style.borderColor = color.value
+    list.appendChild(newNote)
+    NoteDrag(newNote)
+})
+
+document.addEventListener('click', (e) => {
+    if(e.target.classList.contains('exit')){
+        e.target.parentNode.remove()
+    }
+})
+
+let front = 10
+function NoteDrag(element){
+    element.addEventListener("mousedown", (e) => {
+        front++;
+        element.style.zIndex = front
+        const parent = element.parentElement.getBoundingClientRect();
+        let shiftX = e.clientX - element.getBoundingClientRect().left;
+        let shiftY = e.clientY - element.getBoundingClientRect().top;
+
+        function moveAt(pageX, pageY){
+            element.style.left = pageX - parent.left - shiftX + 'px';
+            element.style.top = pageY - parent.top - shiftY + 'px';
+        }
+
+        function onMouseMove(e) {
+            moveAt(e.pageX, e.pageY);
+        }
+
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", () => {
+            document.removeEventListener("mousemove", onMouseMove);
+        }, {once: true});
+    });
+
+    element.ondragstart = () => false;
+}
+
+
+let notesIcon = document.getElementById("NotesTaking")
+let NotesWindow = document.querySelector(".notes-window");
+DragDrop(NotesWindow)
+OpenClose(notesIcon, NotesWindow)
