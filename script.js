@@ -1,15 +1,15 @@
-function DateTime(){
-    let currentTime  = document.querySelector("#current-time")
-    let currentDate  = document.querySelector("#current-Date")
+function DateTime() {
+    let currentTime = document.querySelector("#current-time")
+    let currentDate = document.querySelector("#current-Date")
 
-    function UpdateTime(){
+    function UpdateTime() {
         let date = new Date()
         currentTime.innerHTML = date.toLocaleTimeString()
     }
 
     UpdateTime()
     setInterval(UpdateTime, 1000)
-    
+
     let date = new Date()
     currentDate.innerHTML = date.toLocaleDateString()
 
@@ -43,14 +43,14 @@ function Calendar() {
         monthYear.innerHTML = `${months[month]} ${year}`
         daysContainer.innerHTML = ""
 
-        
+
         for (let i = 0; i < firstDayIndex; i++) {
             const emptyDiv = document.createElement("div")
             emptyDiv.classList.add("empty")
             daysContainer.appendChild(emptyDiv)
         }
 
-        
+
         for (let i = 1; i <= daysInMonth; i++) {
             const dayDiv = document.createElement("div")
             dayDiv.innerHTML = i
@@ -81,44 +81,44 @@ function Calendar() {
     renderCalendar(currentDate)
 }
 
-Calendar()  
+Calendar()
 let CalendarWindow = document.querySelector(".calender-window")
 let openCalender = document.querySelector("#calander")
 DragDrop(CalendarWindow)
 OpenClose(openCalender, CalendarWindow)
 
 
-function ManagesZindexOfWindow(){
-    
+function ManagesZindexOfWindow() {
+
     let zIndexCounter = 10;
-    
-    function bringToFront(elem){
+
+    function bringToFront(elem) {
         zIndexCounter++;
         elem.style.zIndex = zIndexCounter
     }
-    
-    function WindowZindex(){
+
+    function WindowZindex() {
         let allWindow = document.querySelectorAll(".window")
-    
+
         allWindow.forEach(elem => {
             elem.addEventListener("mousedown", () => bringToFront(elem))
         })
     }
-    
+
     WindowZindex()
 }
 
 ManagesZindexOfWindow()
 
-function changeWallpaper(){
+function changeWallpaper() {
     let wallpaper = document.querySelectorAll(".card")
     let background = document.querySelector(".back")
 
     wallpaper.forEach(elem => {
         elem.addEventListener('click', () => {
-        //    let img = elem.querySelector("img").getAttribute('src')
-           let img = elem.childNodes[1].getAttribute('src')
-           background.setAttribute('src', img)
+            //    let img = elem.querySelector("img").getAttribute('src')
+            let img = elem.childNodes[1].getAttribute('src')
+            background.setAttribute('src', img)
         })
     })
 }
@@ -235,8 +235,7 @@ function OpenClose(element, window) {
 
     close.forEach(elem => {
         elem.addEventListener('click', () => {
-            let parentWindow = elem.closest('.terminal, .calculator, .wallpaper-window, .calender-window, .notes-window');
-            console.log(parentWindow)
+            let parentWindow = elem.closest('.terminal, .calculator, .wallpaper-window, .calender-window, .notes-window, .music-window, .google-search-window');
             if (parentWindow) {
                 parentWindow.style.display = 'none';
             }
@@ -257,10 +256,10 @@ function menuExpansion() {
         e.stopPropagation(); // prevent bubbling to document
 
         if (flag === 0) {
-            menuExpand.style.display ='block'
+            menuExpand.style.display = 'block'
             flag = 1;
         } else {
-            menuExpand.style.display ='none'
+            menuExpand.style.display = 'none'
             flag = 0;
         }
     });
@@ -279,20 +278,20 @@ function menuExpansion() {
 
 menuExpansion()
 
-function AppMainMenu(){
-    let mainMenu = document.querySelector("#main-menu") 
+function AppMainMenu() {
+    let mainMenu = document.querySelector("#main-menu")
     let mainMenuWindow = document.querySelector(".main-menu-window")
     let flag = 0;
 
     mainMenu.addEventListener("click", (e) => {
         e.stopPropagation();
 
-        if(flag === 0){
+        if (flag === 0) {
             mainMenuWindow.style.display = "block"
             flag = 1
         }
 
-        else{
+        else {
             mainMenuWindow.style.display = 'none'
             flag = 0
         }
@@ -307,7 +306,7 @@ function AppMainMenu(){
 
 AppMainMenu()
 
-function MainMenuApplication(){
+function MainMenuApplication() {
     let apps = document.querySelectorAll(".app")
 
     const windows = [
@@ -319,19 +318,19 @@ function MainMenuApplication(){
         document.querySelector(".terminal"),        // id="5"
         document.querySelector(".notes-window"),   // id="6" (Notes)
         null,                                        // id="7" (Map)
-        null,                                        // id="8" (Chrome)
-        null,                                        // id="9" (Music)
+        document.querySelector(".google-search-window"),                                        // id="8" (Chrome)
+        document.querySelector(".music-window"),                                        // id="9" (Music)
         null,                                        // id="10" (Code Editor)
         null,                                        // id="11" (WhatsApp)
         document.querySelector(".calender-window")   // id="12" (Calendar)
     ];
 
     apps.forEach((elem, idx) => {
-        elem.addEventListener("click" ,() => {
+        elem.addEventListener("click", () => {
             let win = windows[idx]
             console.log(win, idx)
 
-            if(win){
+            if (win) {
                 win.style.display = "block";
                 ManagesZindexOfWindow(win)
             }
@@ -409,8 +408,8 @@ function BrightnessControl() {
         number.innerHTML = value;
         line.style.width = `${value}%`;
 
-        
-        let level = 1 - (value / 100);  
+
+        let level = 1 - (value / 100);
         overlay.style.opacity = level
     });
 }
@@ -423,6 +422,13 @@ BrightnessControl()
 
 function VolumeControl() {
     let input_range = document.querySelector(".volume .input_range")
+    let sound = document.querySelector(".sound")
+    let number = document.querySelector(".volume .number")
+    let line = document.querySelector(".volume .line")
+
+    let DefaultValue = 40;
+    number.innerHTML = DefaultValue
+    line.style.width = `${DefaultValue}%`
 
     input_range.addEventListener('input', () => {
         let value = input_range.value
@@ -432,6 +438,10 @@ function VolumeControl() {
 
         number.innerHTML = value
         line.style.width = `${value}%`
+
+        if (sound) {
+            sound.volume = value / 100
+        }
     })
 }
 
@@ -488,6 +498,62 @@ const folderWindow = document.querySelector(".folder-window");
 DragDrop(folderWindow);
 
 
+function NotesApplication() {
+    let color = document.getElementById("color");
+    let createBtn = document.getElementById("createBtn")
+    let list = document.getElementById("list")
+
+    createBtn.addEventListener("click", () => {
+        let newNote = document.createElement('div')
+        newNote.classList.add('note');
+        newNote.innerHTML = `
+        <span class="exit">X</span>
+                                    <textarea placeholder="Write-content..." rows="10" cols="30"></textarea>
+        `
+        newNote.style.position = "absolute"
+        newNote.style.borderColor = color.value
+        list.appendChild(newNote)
+        NoteDrag(newNote)
+    })
+
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('exit')) {
+            e.target.parentNode.remove()
+        }
+    })
+
+    let front = 10
+    function NoteDrag(element) {
+        element.addEventListener("mousedown", (e) => {
+            front++;
+            element.style.zIndex = front
+            const parent = element.parentElement.getBoundingClientRect();
+            let shiftX = e.clientX - element.getBoundingClientRect().left;
+            let shiftY = e.clientY - element.getBoundingClientRect().top;
+
+            function moveAt(pageX, pageY) {
+                element.style.left = pageX - parent.left - shiftX + 'px';
+                element.style.top = pageY - parent.top - shiftY + 'px';
+            }
+
+            function onMouseMove(e) {
+                moveAt(e.pageX, e.pageY);
+            }
+
+            document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("mouseup", () => {
+                document.removeEventListener("mousemove", onMouseMove);
+            }, { once: true });
+        });
+
+        element.ondragstart = () => false;
+    }
+
+}
+
+NotesApplication()
+
+
 
 let openCal = document.querySelector("#calculator")
 let calculator = document.querySelector(".calculator")
@@ -504,58 +570,129 @@ OpenClose(openTerminalByMenu, Terminal)
 DragDrop(Terminal)
 
 
-let color = document.getElementById("color");
-let createBtn = document.getElementById("createBtn")
-let list = document.getElementById("list")
-
-createBtn.addEventListener("click", () => {
-    let newNote = document.createElement('div')
-    newNote.classList.add('note');
-    newNote.innerHTML = `
-    <span class="exit">X</span>
-                                <textarea placeholder="Write-content..." rows="10" cols="30"></textarea>
-    `
-    newNote.style.position = "absolute"
-    newNote.style.borderColor = color.value
-    list.appendChild(newNote)
-    NoteDrag(newNote)
-})
-
-document.addEventListener('click', (e) => {
-    if(e.target.classList.contains('exit')){
-        e.target.parentNode.remove()
-    }
-})
-
-let front = 10
-function NoteDrag(element){
-    element.addEventListener("mousedown", (e) => {
-        front++;
-        element.style.zIndex = front
-        const parent = element.parentElement.getBoundingClientRect();
-        let shiftX = e.clientX - element.getBoundingClientRect().left;
-        let shiftY = e.clientY - element.getBoundingClientRect().top;
-
-        function moveAt(pageX, pageY){
-            element.style.left = pageX - parent.left - shiftX + 'px';
-            element.style.top = pageY - parent.top - shiftY + 'px';
-        }
-
-        function onMouseMove(e) {
-            moveAt(e.pageX, e.pageY);
-        }
-
-        document.addEventListener("mousemove", onMouseMove);
-        document.addEventListener("mouseup", () => {
-            document.removeEventListener("mousemove", onMouseMove);
-        }, {once: true});
-    });
-
-    element.ondragstart = () => false;
-}
 
 
 let notesIcon = document.getElementById("NotesTaking")
 let NotesWindow = document.querySelector(".notes-window");
 DragDrop(NotesWindow)
 OpenClose(notesIcon, NotesWindow)
+
+
+
+function MusicPlayer() {
+    let right = document.querySelector(".lower .right")
+    let songPlaylist = document.querySelector(".song-playlist")
+    const songs = [
+        {
+            Name: "Pal - Pal",
+            Addresss: "songs/Afusic - Pal Pal.mp3",
+            Author: "Afusic",
+            Banner: "songs/pal pal.webp"
+        },
+        {
+            Name: "Russian Bandana",
+            Addresss: "songs/Dhanda Nyoliwala - Russian Bandana.mp3",
+            Author: "Dhanda Nyoliwala",
+            Banner: "songs/Russian Bandana.webp"
+        },
+        {
+            Name: "Chal Diye Tum Kahan",
+            Addresss: "songs/Chal Diye Tum Kahan.mp3",
+            Author: "AUR",
+            Banner: "songs/chal diye tum kaha.webp"
+        }
+    ]
+
+    let songIndex = 0
+
+    let progress = document.querySelector("#progress")
+    let play = document.querySelector(".controls #play")
+    let next = document.querySelector(".controls #next")
+    let prev = document.querySelector(".controls #prev")
+    let title = document.querySelector(".title")
+    let banner = document.querySelector(".banner img")
+    let Music = document.getElementById("songs")
+
+    function LoadSong(song) {
+        title.innerHTML = `${song.Name}`
+        banner.setAttribute("src", song.Banner)
+        Music.setAttribute("src", song.Addresss)
+        Music.load()
+    }
+
+    Music.addEventListener("loadedmetadata", () => {
+        progress.max = Music.duration;
+        progress.value = Music.currentTime;
+    });
+
+    setInterval(() => {
+        progress.value = Music.currentTime
+    }, 500);
+
+    progress.addEventListener("change", () => {
+        Music.currentTime = progress.value;
+        Music.play();
+    });
+
+    function togglePlayPause() {
+        if (Music.paused) {
+            Music.play();
+            play.innerHTML = `<i class="ri-pause-fill"></i>`;
+        } else {
+            Music.pause();
+            play.innerHTML = `<i class="ri-play-fill"></i>`;
+        }
+    }
+
+    play.addEventListener("click", togglePlayPause)
+
+    prev.addEventListener("click", () => {
+        songIndex = (songIndex - 1 + songs.length) % songs.length;
+        LoadSong(songs[songIndex]);
+        Music.play();
+        play.innerHTML = `<i class="ri-pause-fill"></i>`;
+    });
+
+    next.addEventListener("click", () => {
+        songIndex = (songIndex + 1) % songs.length;
+        LoadSong(songs[songIndex]);
+        Music.play();
+        play.innerHTML = `<i class="ri-pause-fill"></i>`;
+    });
+
+    let sum = ""
+    songs.forEach((elem, idx) => {
+        sum += `<div class="list" id="${idx}">${elem.Name} (${elem.Author})</div>`
+    })
+    songPlaylist.innerHTML = sum
+
+    right.addEventListener("click", (e) => {
+        if (e.target.classList.contains("list")) {
+            songIndex = parseInt(e.target.id)
+            LoadSong(songs[songIndex])
+            Music.play();
+            play.innerHTML = `<i class="ri-pause-fill"></i>`;
+
+        }
+    });
+
+    LoadSong(songs[songIndex]);
+}
+
+
+MusicPlayer()
+let MusicWindow = document.querySelector(".music-window")
+let MusicIcon = document.getElementById("Music-icon")
+OpenClose(MusicIcon, MusicWindow)
+DragDrop(MusicWindow)
+
+
+
+let ChromeWindow = document.querySelector(".google-search-window")
+let ChromeIcon = document.getElementById("Google-search")
+OpenClose(ChromeIcon, ChromeWindow)
+DragDrop(ChromeWindow)
+
+
+
+

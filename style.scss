@@ -62,7 +62,6 @@ main {
         height: 100vh;
         padding: 1rem;
         position: relative;
-        // overflow: hidden;
         padding: 1rem;
 
         .Date-Time {
@@ -121,7 +120,10 @@ main {
         .folder-window,
         .terminal,
         .wallpaper-window,
-        .calender-window, .notes-window {
+        .calender-window,
+        .notes-window,
+        .music-window,
+        .google-search-window {
             display: flex;
             flex-direction: column;
             width: 40rem;
@@ -447,39 +449,34 @@ main {
             }
         }
 
-        .notes-window{
+        .notes-window {
             // display: block;
             min-height: 30rem;
             min-width: 40rem;
 
-            .upper{
+            .upper {
                 background-color: hsla(0, 0%, 3%, 0.153);
             }
 
-            .lower{
+            .lower {
                 background-color: hsla(0, 0%, 3%, 0.303);
                 border: none;
                 width: 100%;
                 height: 100%;
-                background-image: repeating-linear-gradient(
-                    to right, 
-                    transparent 0 50px,
-                    #fff1 50px 51px
-                ),
-                repeating-linear-gradient(
-                    to bottom, 
-                    transparent 0 50px,
-                    #fff1 50px 51px
-                );
-                position: relative;
                 align-items: flex-start;
                 justify-content: flex-start;
+                background-image: repeating-linear-gradient(to right,
+                        transparent 0 50px,
+                        #fff1 50px 51px),
+                    repeating-linear-gradient(to bottom,
+                        transparent 0 50px,
+                        #fff1 50px 51px);
 
-                .wrapper{
+                .wrapper {
                     position: relative;
                 }
 
-                form{
+                form {
                     background-color: #eee;
                     width: max-content;
                     padding: 5px;
@@ -488,7 +485,8 @@ main {
                     display: flex;
                     gap: 10px;
 
-                    input, button{
+                    input,
+                    button {
                         width: 30px;
                         height: 30px;
                         padding: 0;
@@ -498,18 +496,19 @@ main {
                         cursor: pointer;
                     }
 
-                    input::-webkit-color-swatch-wrapper{
+                    input::-webkit-color-swatch-wrapper {
                         padding: 0;
                     }
 
-                    input::-webkit-color-swatch{
+                    input::-webkit-color-swatch {
                         border-radius: 50%;
                     }
                 }
 
-                #list{
+                #list {
                     position: relative;
-                    .note{
+
+                    .note {
                         background-color: #493c3c;
                         width: fit-content;
                         border-top: 35px solid #e6b905;
@@ -520,7 +519,7 @@ main {
                         top: 60px;
                         left: 50px;
 
-                        span{
+                        span {
                             position: absolute;
                             bottom: 100%;
                             color: black;
@@ -532,7 +531,8 @@ main {
                             cursor: pointer;
                         }
                     }
-                    textarea{
+
+                    textarea {
                         all: unset;
                         color: #d6d6d6;
 
@@ -541,6 +541,127 @@ main {
             }
         }
 
+
+        .music-window {
+            // display: block;
+            min-width: 40rem;
+            min-height: 32rem;
+            color: black;
+
+            .lower {
+                width: 100%;
+                padding: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                background-color: hsl(0, 0%, 100%, 0.4);
+
+                .left {
+                    width: 50%;
+                    height: 80%;
+                    background-color: hsl(0, 0%, 100%, 0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    padding: 1rem;
+                    border-radius: 1rem;
+
+                    .banner {
+                        width: 100%;
+                        height: 10rem;
+                        overflow: hidden;
+                        border-radius: 1rem;
+
+                        img {
+                            width: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .controls {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+
+                        #prev,
+                        #play,
+                        #next {
+                            background-color: hsl(0, 0%, 100%, 0.8);
+                            border-radius: 50%;
+
+                            i {
+                                font-size: 1.5rem;
+                                color: black;
+                                padding: 0.5vw;
+                            }
+                        }
+                    }
+
+                    .progress-container {
+                        width: 100%;
+
+                        input {
+                            width: 100%;
+                            appearance: none;
+                            border-radius: 2rem;
+                            background-color: hsla(0, 0%, 100%, 0.881);
+                            height: 0.3vw;
+                            outline: none;
+                        }
+
+                        input::-webkit-slider-thumb {
+                            appearance: none;
+                            height: 1.4vw;
+                            width: 1.4vw;
+                            border-radius: 50%;
+                            background-color: hsla(0, 0%, 100%, 0.9);
+                        }
+                    }
+                }
+
+                .right {
+                    width: 50%;
+                    height: 80%;
+                    background-color: hsl(0, 0%, 100%, 0.5);
+                    border-radius: 1rem;
+                    padding: 1rem;
+
+                    .song-playlist {
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        gap: 1rem;
+                        text-align: center;
+
+                        .list {
+                            width: 100%;
+                            border-bottom: 1px solid hsl(0, 0%, 100%, 0.8);
+                        }
+
+                        .list:last-child {
+                            border-bottom: none;
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+        .google-search-window {
+            color: black;
+
+            .lower {
+                width: 100%;
+                height: 100%;
+
+            }
+        }
 
     }
 

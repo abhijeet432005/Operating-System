@@ -2,32 +2,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ApnaOS</title>
+    <link rel="stylesheet" href="style.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
 
 <body>
-
-
     <div class="small-screen">
         <h1>Please switch to a bigger screen to use this operating system UI.</h1>
-        <img src="./Assets/monitor.png" alt="">
+        <img src="./Assets/monitor.png" alt="" />
     </div>
 
     <div id="overlay"></div>
 
     <main>
-        <img class="back" src="./Assets/wal9.jpg" alt="" srcset="">
+        <img class="back" src="./Assets/wal9.jpg" alt="" srcset="" />
 
-
-
-
-        
         <div class="top">
-            
             <div class="Date-Time">
                 <ul>
                     <li>
@@ -39,82 +32,72 @@
                 </ul>
             </div>
 
-            
-
             <div class="wallpaper-window window">
                 <div class="upper">
-
                     <div class="left">
-
-                        <img src="./Assets/images.png" alt="">
+                        <img src="./Assets/images.png" alt="" />
                     </div>
 
                     <div class="right">
-                        <img src="./Assets/minimize-sign.png" alt="">
-                        <img src="./Assets/layers.png" alt="">
-                        <img class="close" src="./Assets/close.png" alt="">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="close" src="./Assets/close.png" alt="" />
                     </div>
-
                 </div>
                 <div class="lower">
-
                     <div class="card card1">
-                        <img src="./Assets/5818574-2560x1600-desktop-hd-laptop-wallpaper.jpg" alt="">
+                        <img src="./Assets/5818574-2560x1600-desktop-hd-laptop-wallpaper.jpg" alt="" />
                     </div>
 
                     <div class="card card2">
-                        <img src="./Assets/earth.jpg" alt="">
+                        <img src="./Assets/earth.jpg" alt="" />
                     </div>
 
                     <div class="card card3">
-                        <img src="./Assets/spider.jpg" alt="">
+                        <img src="./Assets/spider.jpg" alt="" />
                     </div>
 
                     <div class="card card4">
-                        <img src="./Assets/monster.jpg" alt="">
+                        <img src="./Assets/monster.jpg" alt="" />
                     </div>
                     <div class="card card4">
-                        <img src="./Assets/rog.jpg" alt="">
+                        <img src="./Assets/rog.jpg" alt="" />
                     </div>
                     <div class="card card5">
-                        <img src="./Assets/wal5.jpg" alt="">
+                        <img src="./Assets/wal5.jpg" alt="" />
                     </div>
                     <div class="card card6">
-                        <img src="./Assets/wal6.jpg" alt="">
+                        <img src="./Assets/wal6.jpg" alt="" />
                     </div>
                     <div class="card card7">
-                        <img src="./Assets/wal7.jpg" alt="">
+                        <img src="./Assets/wal7.jpg" alt="" />
                     </div>
                     <div class="card card8">
-                        <img src="./Assets/wal8.jpg" alt="">
+                        <img src="./Assets/wal8.jpg" alt="" />
                     </div>
                     <div class="card card9">
-                        <img src="./Assets/wal9.jpg" alt="">
+                        <img src="./Assets/wal9.jpg" alt="" />
                     </div>
                     <div class="card card10">
-                        <img src="./Assets/wal10.jpg" alt="">
+                        <img src="./Assets/wal10.jpg" alt="" />
                     </div>
                     <div class="card card11">
-                        <img src="./Assets/wal11.jpg" alt="">
+                        <img src="./Assets/wal11.jpg" alt="" />
                     </div>
-
                 </div>
             </div>
 
             <div class="folder-window window">
                 <div class="upper">
-
                     <div class="left">
-
-                        <img src="./Assets/folder.png" alt="">
+                        <img src="./Assets/folder.png" alt="" />
                     </div>
 
                     <div class="right">
-                        <img src="./Assets/minimize-sign.png" alt="">
-                        <img src="./Assets/layers.png" alt="">
-                        <img class="closeFolder" src="./Assets/close.png" alt="">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="closeFolder" src="./Assets/close.png" alt="" />
                     </div>
-
                 </div>
                 <div class="lower">
                     <h1>Empty</h1>
@@ -124,53 +107,53 @@
             <div class="calculator window">
                 <div class="upper">
                     <div class="left">
-                        <img src="./Assets/calculator.png" alt="">
-
+                        <img src="./Assets/calculator.png" alt="" />
                     </div>
 
                     <div class="right">
-                        <img src="./Assets/minimize-sign.png" alt="">
-                        <img src="./Assets/layers.png" alt="">
-                        <img class="close" id="0" src="./Assets/close.png" alt="">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="close" id="0" src="./Assets/close.png" alt="" />
                     </div>
                 </div>
 
                 <div class="bottom">
                     <form>
                         <div class="display">
-                            <input type="text" name="display">
+                            <input type="text" name="display" />
                         </div>
                         <div>
-                            <input style="color: rgb(0, 131, 0);" type="button" value="AC"
-                                onclick="display.value = '' ">
-                            <input style="color: green;" type="button" value="DE"
-                                onclick="display.value = display.value.toString().slice(0,-1) ">
-                            <input style="color: rgb(255, 13, 0); font-weight: bolder;" type="button" value="."
-                                onclick="display.value += '.' ">
-                            <input style="color: green;" type="button" value="/" onclick="display.value += '/' ">
+                            <input style="color: rgb(0, 131, 0)" type="button" value="AC"
+                                onclick="display.value = '' " />
+                            <input style="color: green" type="button" value="DE"
+                                onclick="display.value = display.value.toString().slice(0,-1) " />
+                            <input style="color: rgb(255, 13, 0); font-weight: bolder" type="button" value="."
+                                onclick="display.value += '.' " />
+                            <input style="color: green" type="button" value="/" onclick="display.value += '/' " />
                         </div>
                         <div>
-                            <input type="button" value="7" onclick="display.value += '7' ">
-                            <input type="button" value="8" onclick="display.value += '8' ">
-                            <input type="button" value="9" onclick="display.value += '9' ">
-                            <input type="button" value="*" onclick="display.value += '*' ">
+                            <input type="button" value="7" onclick="display.value += '7' " />
+                            <input type="button" value="8" onclick="display.value += '8' " />
+                            <input type="button" value="9" onclick="display.value += '9' " />
+                            <input type="button" value="*" onclick="display.value += '*' " />
                         </div>
                         <div>
-                            <input type="button" value="4" onclick="display.value += '4' ">
-                            <input type="button" value="5" onclick="display.value += '5' ">
-                            <input type="button" value="6" onclick="display.value += '6' ">
-                            <input type="button" value="-" onclick="display.value += '-' ">
+                            <input type="button" value="4" onclick="display.value += '4' " />
+                            <input type="button" value="5" onclick="display.value += '5' " />
+                            <input type="button" value="6" onclick="display.value += '6' " />
+                            <input type="button" value="-" onclick="display.value += '-' " />
                         </div>
                         <div>
-                            <input type="button" value="1" onclick="display.value += '1' ">
-                            <input type="button" value="2" onclick="display.value += '2' ">
-                            <input type="button" value="3" onclick="display.value += '3' ">
-                            <input type="button" value="+" onclick="display.value += '+' ">
+                            <input type="button" value="1" onclick="display.value += '1' " />
+                            <input type="button" value="2" onclick="display.value += '2' " />
+                            <input type="button" value="3" onclick="display.value += '3' " />
+                            <input type="button" value="+" onclick="display.value += '+' " />
                         </div>
                         <div>
-                            <input type="button" value="00" onclick="display.value += '00' ">
-                            <input type="button" value="0" onclick="display.value += '0' ">
-                            <input type="button" value="=" class="equal" onclick="display.value = eval(display.value) ">
+                            <input type="button" value="00" onclick="display.value += '00' " />
+                            <input type="button" value="0" onclick="display.value += '0' " />
+                            <input type="button" value="=" class="equal"
+                                onclick="display.value = eval(display.value) " />
                         </div>
                     </form>
                 </div>
@@ -178,125 +161,109 @@
 
             <div class="terminal window">
                 <div class="upper">
-
                     <div class="left">
-
-                        <img src="./Assets/terminal.png" alt="">
+                        <img src="./Assets/terminal.png" alt="" />
                     </div>
 
                     <div class="right">
-                        <img src="./Assets/minimize-sign.png" alt="">
-                        <img src="./Assets/layers.png" alt="">
-                        <img class="close" id="1" src="./Assets/close.png" alt="">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="close" id="1" src="./Assets/close.png" alt="" />
                     </div>
-
                 </div>
                 <div class="lower">
-                    <p><span style="color: green;">Microsoft Windows [Version 10.0.26100.4351] <br>
-                            (c) Microsoft Corporation. All rights reserved. </span><br><br>
+                    <p>
+                        <span style="color: green">Microsoft Windows [Version 10.0.26100.4351] <br />
+                            (c) Microsoft Corporation. All rights reserved. </span><br /><br />
 
-                        <span style="color: red;">C:\Users\ADMIN></span>
+                        <span style="color: red">C:\Users\ADMIN></span>
                     </p>
                 </div>
             </div>
 
-            <div class="system-window .window">
-
-            </div>
+            <div class="system-window .window"></div>
 
             <div class="main-menu-window">
                 <div class="apps">
                     <div id="0" class="app-1 app">
-                        <img src="./Assets/calculator.png" alt="">
+                        <img src="./Assets/calculator.png" alt="" />
                         <p>calculator</p>
                     </div>
                     <div id="1" class="app-2 app">
-                        <img src="./Assets/images.png" alt="">
+                        <img src="./Assets/images.png" alt="" />
                         <p>wallpaper</p>
-
                     </div>
                     <div id="2" class="app-3 app">
-                        <img src="./Assets/linkedin.png" alt="">
+                        <img src="./Assets/linkedin.png" alt="" />
                         <p>linkedin</p>
-
                     </div>
                     <div id="3" class="app-4 app">
-                        <img src="./Assets/cloudy.png" alt="">
+                        <img src="./Assets/cloudy.png" alt="" />
                         <p>weather</p>
-
                     </div>
                     <div id="4" class="app-5 app">
-                        <img src="./Assets/camera.png" alt="">
+                        <img src="./Assets/camera.png" alt="" />
                         <p>camera</p>
-
                     </div>
                     <div id="5" class="app-6 app">
-                        <img src="./Assets/terminal.png" alt="">
+                        <img src="./Assets/terminal.png" alt="" />
                         <p>terminal</p>
-
                     </div>
                     <div id="6" class="app-7 app">
-                        <img src="./Assets/post-it.png" alt="">
+                        <img src="./Assets/post-it.png" alt="" />
                         <p>notes</p>
-
                     </div>
                     <div id="7" class="app-8 app">
-                        <img src="./Assets/map.png" alt="">
+                        <img src="./Assets/map.png" alt="" />
                         <p>map</p>
-
                     </div>
-                    
-                    <div id="8" class="app-9 app">
-                        <img src="./Assets/chrome.png" alt="">
-                        <p>chrome</p>
 
+                    <div id="8" class="app-9 app">
+                        <img id="Google-search" src="./Assets/chrome.png" alt="" />
+                        <p>chrome</p>
                     </div>
                     <div id="9" class="app-10 app">
-                        <img src="./Assets/music.png" alt="">
+                        <img src="./Assets/music.png" alt="" />
                         <p>music</p>
-
                     </div>
                     <div id="10" class="app-10 app">
-                        <img src="./Assets/code.png" alt="">
+                        <img src="./Assets/code.png" alt="" />
                         <p>code editor</p>
-
                     </div>
                     <div id="11" class="app-11 app">
-                        <img src="./Assets/whatsapp.png" alt="">
+                        <img src="./Assets/whatsapp.png" alt="" />
                         <p>whatsapp</p>
-
                     </div>
                     <div id="12" class="app-12 app">
-                        <img id="calander" src="./Assets/calendar.png" alt="">
+                        <img id="calander" src="./Assets/calendar.png" alt="" />
                         <p>calender</p>
-
                     </div>
                 </div>
             </div>
 
             <div class="calender-window window">
-
                 <div class="upper">
-
                     <div class="left">
-
-                        <img src="./Assets/calendar.png" alt="">
+                        <img src="./Assets/calendar.png" alt="" />
                     </div>
 
                     <div class="right">
-                        <img src="./Assets/minimize-sign.png" alt="">
-                        <img src="./Assets/layers.png" alt="">
-                        <img class="close" src="./Assets/close.png" alt="">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="close" src="./Assets/close.png" alt="" />
                     </div>
-
                 </div>
 
                 <div class="lower">
                     <div class="wrapper">
                         <div class="header">
-                            <div id="prev" class="btn"><i class="ri-arrow-left-line"></i></div>
+                            <div id="prev" class="btn">
+                                <i class="ri-arrow-left-line"></i>
+                            </div>
                             <div id="month-year"></div>
-                            <div id="next" class="btn"><i class="ri-arrow-right-line"></i></div>
+                            <div id="next" class="btn">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
                         </div>
                         <div class="weekdays">
                             <div>Sun</div>
@@ -315,29 +282,83 @@
 
             <div class="notes-window window">
                 <div class="upper">
-
                     <div class="left">
-
-                        <img src="./Assets/post-it.png" alt="">
+                        <img src="./Assets/post-it.png" alt="" />
                     </div>
 
                     <div class="right">
-                        <img src="./Assets/minimize-sign.png" alt="">
-                        <img src="./Assets/layers.png" alt="">
-                        <img class="close" src="./Assets/close.png" alt="">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="close" src="./Assets/close.png" alt="" />
                     </div>
-
                 </div>
                 <div id="Lower" class="lower">
                     <div class="wraper">
                         <form action="">
-                            <input type="color" id="color" value="#e6b905">
+                            <input type="color" id="color" value="#e6b905" />
                             <button type="button" id="createBtn">+</button>
                         </form>
-                        <div id="list">
-                            
+                        <div id="list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="music-window window">
+                <div class="upper">
+                    <div class="left">
+                        <img src="./Assets/music.png" alt="" />
+                    </div>
+
+                    <div class="right">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="close" src="./Assets/close.png" alt="" />
+                    </div>
+                </div>
+
+                <div class="lower">
+                    <div class="left">
+                        <div class="title">--</div>
+                        <audio class="sound" id="songs">
+                            <source src="" />
+                        </audio>
+
+                        <div class="banner">
+                            <img src="songs/pal pal.webp" alt="" srcset="" />
+                        </div>
+
+                        <div class="progress-container">
+                            <input type="range" id="progress" value="0" />
+                        </div>
+
+                        <div class="controls">
+                            <div id="prev"><i class="ri-skip-back-fill"></i></div>
+                            <div id="play"><i class="ri-play-fill"></i></div>
+                            <div id="next"><i class="ri-skip-forward-fill"></i></div>
                         </div>
                     </div>
+
+                    <div class="right">
+                        <div class="song-playlist"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="google-search-window window">
+                <div class="upper">
+                    <div class="left">
+                        <img src="./Assets/chrome.png" alt="" />
+                    </div>
+
+                    <div class="right">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="close" src="./Assets/close.png" alt="" />
+                    </div>
+                </div>
+                <div class="lower">
+                    <script async src="https://cse.google.com/cse.js?cx=11ab79689015a48b8"></script>
+                    <div class="gcse-search"></div>
                 </div>
             </div>
         </div>
@@ -347,30 +368,33 @@
                 <div class="weather">
                     <ul>
                         <li>
-                            <img src="./Assets/cloudy.png" alt="" srcset="">
+                            <img src="./Assets/cloudy.png" alt="" srcset="" />
                             26.8°C
-
-
                         </li>
-
-
                     </ul>
                 </div>
 
                 <div class="apps">
                     <ul>
-                        <li><img src="./Assets/camera.png" alt="" srcset=""></li>
-                        <li id="wallpaper"><img src="./Assets/images.png" alt="" srcset=""></li>
-                        <li><img id="calculator" src="./Assets/calculator.png" alt="" srcset=""></li>
-                        <li id="main-menu"><img src="./Assets/main-menu.png" alt=""></li>
-                        <li><img src="./Assets/map.png" alt=""></li>
-                        <li id="NotesTaking"><img src="./Assets/post-it.png" alt=""></li>
-                        <li><img src="./Assets/linkedin.png" alt=""></li>
+                        <li><img src="./Assets/camera.png" alt="" srcset="" /></li>
+                        <li id="wallpaper">
+                            <img src="./Assets/images.png" alt="" srcset="" />
+                        </li>
+                        <li>
+                            <img id="calculator" src="./Assets/calculator.png" alt="" srcset="" />
+                        </li>
+                        <li id="main-menu">
+                            <img src="./Assets/main-menu.png" alt="" />
+                        </li>
+                        <li><img src="./Assets/map.png" alt="" /></li>
+                        <li id="NotesTaking">
+                            <img src="./Assets/post-it.png" alt="" />
+                        </li>
+                        <li id="Music-icon"><img src="./Assets/music.png" alt="" /></li>
                     </ul>
                 </div>
 
                 <div class="menu">
-
                     <div class="icon">
                         <ul>
                             <li><i class="ri-battery-fill"></i></li>
@@ -378,9 +402,7 @@
 
                             <li><i class="ri-wifi-line"></i></li>
                         </ul>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -388,47 +410,40 @@
         <div class="menu-expand">
             <div class="expand">
                 <div class="taskBar">
-
                     <div id="0" class="img1 img">
-                        <img id="0" src="./Assets/wi-fi-icon.png" alt="">
+                        <img id="0" src="./Assets/wi-fi-icon.png" alt="" />
                     </div>
                     <div id="1" class="img2 img">
-                        <img id="1" src="./Assets/bluetooth.png" alt="">
+                        <img id="1" src="./Assets/bluetooth.png" alt="" />
                     </div>
                     <div id="2" class="img3 img">
-                        <img src="./Assets/black-plane.png" alt="">
+                        <img src="./Assets/black-plane.png" alt="" />
                     </div>
                     <div id="3" class="img4 img">
-                        <img src="./Assets/battery.png" alt="">
+                        <img src="./Assets/battery.png" alt="" />
                     </div>
                     <div id="4" class="img5 img">
-                        <img src="./Assets/idea.png" alt="">
+                        <img src="./Assets/idea.png" alt="" />
                     </div>
                     <div id="5" class="img6 img">
-                        <img src="./Assets/accesibility.png" alt="">
+                        <img src="./Assets/accesibility.png" alt="" />
                     </div>
 
                     <div class="brightness">
-
                         <div class="box">
                             <div class="line"></div>
-                            <input type="range" class="input_range" min="0" max="100" value="60">
+                            <input type="range" class="input_range" min="0" max="100" value="60" />
                         </div>
                         <p class="number">0</p>
-
                     </div>
 
                     <div class="volume">
-
                         <div class="box">
                             <div class="line"></div>
-                            <input type="range" class="input_range" min="0" max="100" value="0">
+                            <input type="range" class="input_range" min="0" max="100" value="0" />
                         </div>
                         <p class="number">0</p>
-
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -443,20 +458,15 @@
             </ul>
         </div>
 
-
         <div class="folder-menu">
             <ul>
                 <li class="delete">Delete</li>
                 <li>Rename</li>
             </ul>
         </div>
-
-
     </main>
 
-
     <script src="script.js"></script>
-
 </body>
 
 </html>
