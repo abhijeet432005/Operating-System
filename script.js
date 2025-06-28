@@ -87,6 +87,15 @@ let openCalender = document.querySelector("#calander")
 DragDrop(CalendarWindow)
 OpenClose(openCalender, CalendarWindow)
 
+function refresh(){
+    let refresh = document.querySelector("#Refresh")
+
+    refresh.addEventListener("click", () => {
+        location.reload()
+    })
+}
+
+refresh()
 
 function ManagesZindexOfWindow() {
 
@@ -157,72 +166,13 @@ function DragDrop(element) {
     element.ondragstart = () => false
 }
 
-function IconDraggable(Icon) {
 
-    Icon.addEventListener("mousedown", (e) => {
 
-        let shiftX = e.clientX - Icon.getBoundingClientRect().left
-        let shiftY = e.clientY - Icon.getBoundingClientRect().top
-
-        // folder.style.zindex = 9
-
-        function moveAt(pageX, pageY) {
-            Icon.style.left = pageX - shiftX + "px"
-            Icon.style.top = pageY - shiftY + "px"
-        }
-
-        moveAt(e.pageX, e.pageY)
-
-        function onMouseMove(e) {
-            moveAt(e.pageX, e.pageY)
-        }
-
-        document.addEventListener("mousemove", onMouseMove)
-
-        Icon.addEventListener("mouseup", () => {
-            document.removeEventListener("mousemove", onMouseMove)
-        }, { once: true })
-    })
-
-    Icon.ondragstart = () => false
+function AttachDoubleClickRename(folder) {
+  folder.querySelector(".name-change")?.addEventListener("dblclick", () => {
+    EnableRename(folder);
+  });
 }
-
-let currentRightClickedFolder = null;
-function IconMenu(element) {
-    let menu = document.querySelector(".folder-menu")
-
-    element.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        currentRightClickedFolder = element;
-
-        menu.style.top = e.clientY + 'px'
-        menu.style.left = e.clientX + 'px'
-        menu.style.display = 'block'
-    })
-
-    document.addEventListener('click', () => {
-        menu.style.display = 'none'
-    })
-
-
-}
-
-
-
-function Delete() {
-    let Del = document.querySelector('.delete');
-
-    Del.addEventListener('click', () => {
-        if (currentRightClickedFolder) {
-            currentRightClickedFolder.remove();
-            currentRightClickedFolder = null;
-        }
-    });
-}
-
-Delete()
 
 
 function OpenClose(element, window) {
@@ -417,9 +367,6 @@ function BrightnessControl() {
 BrightnessControl();
 
 
-BrightnessControl()
-
-
 function VolumeControl() {
     let input_range = document.querySelector(".volume .input_range")
     let sound = document.querySelector(".sound")
@@ -467,7 +414,10 @@ function CreateFolder() {
         container.appendChild(folder)
         IconDraggable(folder);
         folderOpenClose(folder);
+        EnableRename(folder)
         IconMenu(folder);
+        AttachDoubleClickRename(folder);
+
     })
 
 
@@ -475,6 +425,120 @@ function CreateFolder() {
 }
 
 CreateFolder()
+
+function EnableRename(folder) {
+  const nameElement = folder.querySelector(".name-change");
+  if (!nameElement) return;
+
+  const currentName = nameElement.innerText;
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = currentName;
+  input.classList.add("rename-input");
+
+  folder.replaceChild(input, nameElement);
+  input.focus();
+
+  function saveName() {
+    const newName = input.value.trim() || currentName;
+    const newSpan = document.createElement("span");
+    newSpan.classList.add("name-change");
+    newSpan.innerText = newName;
+
+    folder.replaceChild(newSpan, input);
+    AttachDoubleClickRename(folder); // attach dblclick again on new span
+  }
+
+  input.addEventListener("blur", saveName);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      saveName();
+    }
+  });
+}
+
+function IconDraggable(Icon) {
+
+    Icon.addEventListener("mousedown", (e) => {
+
+        let shiftX = e.clientX - Icon.getBoundingClientRect().left
+        let shiftY = e.clientY - Icon.getBoundingClientRect().top
+
+        // folder.style.zindex = 9
+
+        function moveAt(pageX, pageY) {
+            Icon.style.left = pageX - shiftX + "px"
+            Icon.style.top = pageY - shiftY + "px"
+        }
+
+        moveAt(e.pageX, e.pageY)
+
+        function onMouseMove(e) {
+            moveAt(e.pageX, e.pageY)
+        }
+
+        document.addEventListener("mousemove", onMouseMove)
+
+        Icon.addEventListener("mouseup", () => {
+            document.removeEventListener("mousemove", onMouseMove)
+        }, { once: true })
+    })
+
+    Icon.ondragstart = () => false
+}
+
+let currentRightClickedFolder = null;
+
+function IconMenu(element) {
+    let menu = document.querySelector(".folder-menu")
+
+    element.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        currentRightClickedFolder = element;
+
+        menu.style.top = e.clientY + 'px'
+        menu.style.left = e.clientX + 'px'
+        menu.style.display = 'block'
+    })
+
+    document.addEventListener('click', () => {
+        menu.style.display = 'none'
+    })
+
+
+}
+
+
+
+function Delete() {
+    let Del = document.querySelector('.delete');
+
+    Del.addEventListener('click', () => {
+        if (currentRightClickedFolder) {
+            currentRightClickedFolder.remove();
+            currentRightClickedFolder = null;
+        }
+    });
+}
+
+Delete()
+
+function RenameFolder(){
+    let rename = document.querySelector(".Rename")
+
+    rename.addEventListener("click", () => {
+        
+        if(currentRightClickedFolder){
+            EnableRename(currentRightClickedFolder)
+        }
+    })
+}
+
+RenameFolder()
+
 
 function folderOpenClose(folder) {
     let open = document.querySelector(".folder-window")
@@ -510,7 +574,7 @@ function NotesApplication() {
         <span class="exit">X</span>
                                     <textarea placeholder="Write-content..." rows="10" cols="30"></textarea>
         `
-        newNote.style.position = "absolute"
+        
         newNote.style.borderColor = color.value
         list.appendChild(newNote)
         NoteDrag(newNote)
