@@ -168,11 +168,7 @@ function DragDrop(element) {
 
 
 
-function AttachDoubleClickRename(folder) {
-  folder.querySelector(".name-change")?.addEventListener("dblclick", () => {
-    EnableRename(folder);
-  });
-}
+
 
 
 function OpenClose(element, window) {
@@ -455,6 +451,14 @@ function EnableRename(folder) {
     if (e.key === "Enter") {
       saveName();
     }
+  });
+}
+
+
+function AttachDoubleClickRename(folder) {
+  folder.querySelector(".name-change")?.addEventListener("dblclick", (e) => {
+    e.stopPropagation()
+    EnableRename(folder);
   });
 }
 

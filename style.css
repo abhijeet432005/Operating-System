@@ -108,6 +108,12 @@ main .top .folder {
 main .top .folder img {
   width: 3rem;
 }
+main .top .folder input {
+  outline: none;
+  text-align: center;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
 main .top .folder-window,
 main .top .terminal,
 main .top .wallpaper-window,
