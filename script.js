@@ -899,7 +899,7 @@ function CameraWrap() {
         captureBtn.addEventListener("click", () => {
             preview.style.display = "block"
         })
-        
+
 
 
         preview.addEventListener("click", () => {
