@@ -658,6 +658,7 @@ main .top .gallery-window .gallery {
 }
 main .top .gallery-window .gallery .thumbnails {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
 }
