@@ -87,7 +87,7 @@ let openCalender = document.querySelector("#calander")
 DragDrop(CalendarWindow)
 OpenClose(openCalender, CalendarWindow)
 
-function refresh(){
+function refresh() {
     let refresh = document.querySelector("#Refresh")
 
     refresh.addEventListener("click", () => {
@@ -165,9 +165,6 @@ function DragDrop(element) {
 
     element.ondragstart = () => false
 }
-
-
-
 
 
 
@@ -252,6 +249,7 @@ function AppMainMenu() {
 
 AppMainMenu()
 
+
 function MainMenuApplication() {
     let apps = document.querySelectorAll(".app")
 
@@ -267,14 +265,14 @@ function MainMenuApplication() {
         document.querySelector(".google-search-window"),                                        // id="8" (Chrome)
         document.querySelector(".music-window"),                                        // id="9" (Music)
         null,                                        // id="10" (Code Editor)
-        null,                                        // id="11" (WhatsApp)
+        document.querySelector(".gallery-window"),                                        // id="11" (Gallery)
         document.querySelector(".calender-window")   // id="12" (Calendar)
     ];
 
     apps.forEach((elem, idx) => {
         elem.addEventListener("click", () => {
             let win = windows[idx]
-            console.log(win, idx)
+            // console.log(win, idx)
 
             if (win) {
                 win.style.display = "block";
@@ -282,9 +280,65 @@ function MainMenuApplication() {
             }
         })
     })
+
+
+    apps.forEach(app => {
+        app.addEventListener("click", () => {
+            const appName = app.dataset.app;
+            const appWindow = document.querySelector(`.window[data-app="${appName}"]`);
+
+            if (!appWindow) return;
+
+            appWindow.style.display = "block";
+            ManagesZindexOfWindow(appWindow);
+
+            addRemoveAppToTaskbar(appName, app.querySelector("img").src);
+        });
+    });
+
 }
 
 MainMenuApplication()
+
+function addRemoveAppToTaskbar(appName, iconSrc) {
+    const taskbar = document.querySelector("#taskbar-apps");
+
+    if (document.querySelector(`li[data-app="${appName}"]`)) return;
+
+    const li = document.createElement("li");
+    li.dataset.app = appName;
+    li.innerHTML = `<img src="${iconSrc}" alt="${appName}" />`;
+
+    li.addEventListener("click", () => {
+        const win = document.querySelector(`.window[data-app="${appName}"]`);
+        if (!win) return;
+
+        if (win.style.display === "none") {
+            win.style.display = "block";
+            ManagesZindexOfWindow(win);
+        } else {
+            win.style.display = "none";
+        }
+    });
+
+    taskbar.appendChild(li);
+
+    document.querySelectorAll(".close").forEach(closeBtn => {
+        closeBtn.addEventListener("click", () => {
+            const win = closeBtn.closest(".window");
+            if (!win) return;
+
+            const appName = win.dataset.app;
+            win.style.display = "none";
+
+            const icon = document.querySelector(`#taskbar-apps li[data-app="${appName}"]`);
+            if (icon) icon.remove();
+        });
+    });
+}
+
+
+
 
 function TaskBarSwitchOnOF() {
     let taskBar = document.querySelectorAll(".taskBar .img")
@@ -423,43 +477,46 @@ function CreateFolder() {
 CreateFolder()
 
 function EnableRename(folder) {
-  const nameElement = folder.querySelector(".name-change");
-  if (!nameElement) return;
+    const nameElement = folder.querySelector(".name-change");
+    if (!nameElement) return;
 
-  const currentName = nameElement.innerText;
+    const currentName = nameElement.innerText;
 
-  const input = document.createElement("input");
-  input.type = "text";
-  input.value = currentName;
-  input.classList.add("rename-input");
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = currentName;
+    input.classList.add("rename-input");
 
-  folder.replaceChild(input, nameElement);
-  input.focus();
+    folder.replaceChild(input, nameElement);
+    //           |          |
+    // newElement  // oldElement
 
-  function saveName() {
-    const newName = input.value.trim() || currentName;
-    const newSpan = document.createElement("span");
-    newSpan.classList.add("name-change");
-    newSpan.innerText = newName;
+    input.focus();
 
-    folder.replaceChild(newSpan, input);
-    AttachDoubleClickRename(folder); // attach dblclick again on new span
-  }
+    function saveName() {
+        const newName = input.value.trim() || currentName;
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("name-change");
+        newSpan.innerText = newName;
 
-  input.addEventListener("blur", saveName);
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      saveName();
+        folder.replaceChild(newSpan, input);
+        AttachDoubleClickRename(folder); // attach dblclick again on new span
     }
-  });
+
+    input.addEventListener("blur", saveName);
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            saveName();
+        }
+    });
 }
 
 
 function AttachDoubleClickRename(folder) {
-  folder.querySelector(".name-change")?.addEventListener("dblclick", (e) => {
-    e.stopPropagation()
-    EnableRename(folder);
-  });
+    folder.querySelector(".name-change")?.addEventListener("dblclick", (e) => {
+        e.stopPropagation()
+        EnableRename(folder);
+    });
 }
 
 function IconDraggable(Icon) {
@@ -530,12 +587,12 @@ function Delete() {
 
 Delete()
 
-function RenameFolder(){
+function RenameFolder() {
     let rename = document.querySelector(".Rename")
 
     rename.addEventListener("click", () => {
-        
-        if(currentRightClickedFolder){
+
+        if (currentRightClickedFolder) {
             EnableRename(currentRightClickedFolder)
         }
     })
@@ -546,10 +603,12 @@ RenameFolder()
 
 function folderOpenClose(folder) {
     let open = document.querySelector(".folder-window")
+    const FolderWin = document.querySelector(`.window[data-app="folder]`)
 
     folder.addEventListener("dblclick", () => {
         // open.style.opacity = 1
         open.style.display = 'block'
+        addRemoveAppToTaskbar("folder", "./Assets/folder.png")
         ManagesZindexOfWindow()
     })
 
@@ -578,7 +637,7 @@ function NotesApplication() {
         <span class="exit">X</span>
                                     <textarea placeholder="Write-content..." rows="10" cols="30"></textarea>
         `
-        
+
         newNote.style.borderColor = color.value
         list.appendChild(newNote)
         NoteDrag(newNote)
@@ -761,6 +820,167 @@ let ChromeIcon = document.getElementById("Google-search")
 OpenClose(ChromeIcon, ChromeWindow)
 DragDrop(ChromeWindow)
 
+
+
+
+function appHighlightEffect() {
+    function toggleTaskbarHighlight(appName, isActive) {
+        const taskbarIcon = document.querySelector(`.task-bar .apps li[data-app="${appName}"]`);
+        if (!taskbarIcon) return;
+
+        taskbarIcon.classList.toggle("active", isActive);
+    }
+
+    function showAppWindow(appName) {
+        const appWindow = document.querySelector(`.window[data-app="${appName}"]`);
+        if (!appWindow) return;
+
+        appWindow.style.display = "block";
+        ManagesZindexOfWindow(appWindow);
+        toggleTaskbarHighlight(appName, true);
+    }
+
+    function hideAppWindow(appName) {
+        const appWindow = document.querySelector(`.window[data-app="${appName}"]`);
+        if (!appWindow) return;
+
+        appWindow.style.display = "none";
+        toggleTaskbarHighlight(appName, false);
+    }
+
+    document.querySelectorAll(".window .close").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const parentWindow = btn.closest(".window");
+            if (!parentWindow) return;
+
+            const appName = parentWindow.dataset.app;
+            hideAppWindow(appName);
+        });
+    });
+
+    document.querySelectorAll(".app").forEach(app => {
+        app.addEventListener("click", () => {
+            const appName = app.dataset.app;
+            showAppWindow(appName);
+        });
+    });
+
+    document.querySelectorAll(".task-bar .apps li").forEach(icon => {
+        icon.addEventListener("click", () => {
+            const appName = icon.dataset.app;
+            showAppWindow(appName);
+        });
+    });
+
+}
+
+
+appHighlightEffect()
+
+let capturedImages = [];       // Shared with gallery
+let cameraStream = null;       // To manage start/stop stream
+let isCameraInitialized = false; // Flag to avoid duplicate init
+function CameraWrap() {
+
+    function CameraFnc() {
+        let camera = document.getElementById("camera");
+        let captureBtn = document.getElementById("capture");
+        let previewImage = document.getElementById("previewImage");
+        let thumbnails = document.getElementById("thumbnails");
+
+        if (!cameraStream) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+                cameraStream = stream;
+                camera.srcObject = stream;
+                camera.play();
+            });
+        }
+
+        if (!isCameraInitialized) {
+            isCameraInitialized = true;
+
+            captureBtn.addEventListener("click", () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = camera.videoWidth;
+                canvas.height = camera.videoHeight;
+                const ctx = canvas.getContext("2d");
+                ctx.translate(canvas.width, 0);
+                ctx.scale(-1, 1);
+                ctx.drawImage(camera, 0, 0, canvas.width, canvas.height);
+
+                const imgURL = canvas.toDataURL();
+                previewImage.src = imgURL;
+
+                const thumb = document.createElement("img");
+                thumb.src = imgURL;
+                thumbnails.appendChild(thumb);
+
+                capturedImages.push(imgURL);
+                thumb.addEventListener("click", () => openFullscreen(capturedImages.indexOf(imgURL)));
+            });
+
+            let cameraCloseBtn = document.querySelector(".camera-window .close");
+            cameraCloseBtn.addEventListener("click", () => {
+                document.querySelector(".camera-window").style.display = "none";
+                if (cameraStream) {
+                    cameraStream.getTracks().forEach(track => track.stop());
+                    cameraStream = null;
+                    isCameraInitialized = false;
+                }
+            });
+        }
+    }
+
+
+    document.getElementById("CameraIcon").addEventListener("click", () => {
+        let cameraWindow = document.querySelector(".camera-window");
+        cameraWindow.style.display = "block";
+        CameraFnc(); // Stream will restart only if not already running
+    });
+
+
+    let cameraWindow = document.querySelector(".camera-window")
+    DragDrop(cameraWindow)
+
+}
+
+
+CameraWrap()
+
+
+function galleryFnc() {
+    let fullscreen = document.getElementById("fullscreenView");
+    let fullscreenImg = document.getElementById("fullscreenImage");
+    let closeFullscreen = document.getElementById("closeFullscreen");
+    let prevImageBtn = document.getElementById("prevImage");
+    let nextImageBtn = document.getElementById("nextImage");
+
+    let currentImageIndex = 0;
+
+    window.openFullscreen = function (index) {
+        currentImageIndex = index;
+        fullscreenImg.src = capturedImages[index];
+        fullscreen.style.display = "flex";
+    }
+
+    closeFullscreen.addEventListener("click", () => {
+        fullscreen.style.display = "none";
+    });
+
+    prevImageBtn.addEventListener("click", () => {
+        currentImageIndex = (currentImageIndex - 1 + capturedImages.length) % capturedImages.length;
+        fullscreenImg.src = capturedImages[currentImageIndex];
+    });
+
+    nextImageBtn.addEventListener("click", () => {
+        currentImageIndex = (currentImageIndex + 1) % capturedImages.length;
+        fullscreenImg.src = capturedImages[currentImageIndex];
+    });
+}
+galleryFnc();
+
+let galleryWindow = document.querySelector(".gallery-window")
+DragDrop(galleryWindow)
 
 
 

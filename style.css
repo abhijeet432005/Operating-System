@@ -120,7 +120,9 @@ main .top .wallpaper-window,
 main .top .calender-window,
 main .top .notes-window,
 main .top .music-window,
-main .top .google-search-window {
+main .top .google-search-window,
+main .top .camera-window,
+main .top .gallery-window {
   display: flex;
   flex-direction: column;
   width: 40rem;
@@ -139,7 +141,9 @@ main .top .wallpaper-window .upper,
 main .top .calender-window .upper,
 main .top .notes-window .upper,
 main .top .music-window .upper,
-main .top .google-search-window .upper {
+main .top .google-search-window .upper,
+main .top .camera-window .upper,
+main .top .gallery-window .upper {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -161,7 +165,9 @@ main .top .wallpaper-window .upper img,
 main .top .calender-window .upper img,
 main .top .notes-window .upper img,
 main .top .music-window .upper img,
-main .top .google-search-window .upper img {
+main .top .google-search-window .upper img,
+main .top .camera-window .upper img,
+main .top .gallery-window .upper img {
   width: 1rem;
   cursor: pointer;
 }
@@ -171,7 +177,9 @@ main .top .wallpaper-window .upper .right,
 main .top .calender-window .upper .right,
 main .top .notes-window .upper .right,
 main .top .music-window .upper .right,
-main .top .google-search-window .upper .right {
+main .top .google-search-window .upper .right,
+main .top .camera-window .upper .right,
+main .top .gallery-window .upper .right {
   cursor: pointer;
 }
 main .top .folder-window .upper:active,
@@ -180,7 +188,9 @@ main .top .wallpaper-window .upper:active,
 main .top .calender-window .upper:active,
 main .top .notes-window .upper:active,
 main .top .music-window .upper:active,
-main .top .google-search-window .upper:active {
+main .top .google-search-window .upper:active,
+main .top .camera-window .upper:active,
+main .top .gallery-window .upper:active {
   cursor: grabbing;
 }
 main .top .folder-window .lower,
@@ -189,7 +199,9 @@ main .top .wallpaper-window .lower,
 main .top .calender-window .lower,
 main .top .notes-window .lower,
 main .top .music-window .lower,
-main .top .google-search-window .lower {
+main .top .google-search-window .lower,
+main .top .camera-window .lower,
+main .top .gallery-window .lower {
   width: 100%;
   height: 100%;
   background: hsla(0, 0%, 100%, 0.2);
@@ -269,13 +281,14 @@ main .top .calculator .bottom .equal {
   color: red;
 }
 main .top .terminal .upper {
-  background: hsla(0, 0%, 100%, 0.4);
+  background: hsla(0, 1%, 44%, 0.4);
 }
 main .top .terminal .lower {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  background: hsla(0, 0%, 100%, 0.5);
+  background-color: hsla(0, 0%, 0%, 0.623);
+  background-image: repeating-linear-gradient(to right, transparent 0 50px, rgba(255, 255, 255, 0.0666666667) 50px 51px), repeating-linear-gradient(to bottom, transparent 0 50px, rgba(255, 255, 255, 0.0666666667) 50px 51px);
 }
 main .top .wallpaper-window {
   min-width: 50rem;
@@ -602,6 +615,132 @@ main .top .google-search-window .lower {
   width: 100%;
   height: 100%;
 }
+main .top .gallery-window {
+  min-width: 40rem;
+  min-height: 30rem;
+}
+main .top .gallery-window .upper {
+  background-color: hsla(0, 0%, 0%, 0.5);
+}
+main .top .gallery-window .lower {
+  align-items: flex-start;
+  justify-content: flex-start;
+  border: none;
+  background-image: repeating-linear-gradient(to right, transparent 0 50px, rgba(255, 255, 255, 0.0666666667) 50px 51px), repeating-linear-gradient(to bottom, transparent 0 50px, rgba(255, 255, 255, 0.0666666667) 50px 51px);
+}
+main .top .gallery-window .lower h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: hsla(0, 0%, 0%, 0.3);
+  font-family: cursive;
+  font-weight: normal;
+  z-index: -1;
+}
+main .top .gallery-window .gallery {
+  padding: 1rem;
+  position: relative;
+}
+main .top .gallery-window .gallery .thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+main .top .gallery-window .gallery .thumbnails img {
+  width: 10vw;
+  height: 8vw;
+  -o-object-fit: cover;
+     object-fit: cover;
+  cursor: pointer;
+}
+main .top .gallery-window .gallery .fullscreen-view {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background: hsla(0, 0%, 0%, 0.573);
+  background-image: repeating-linear-gradient(to right, transparent 0 50px, rgba(255, 255, 255, 0.0666666667) 50px 51px), repeating-linear-gradient(to bottom, transparent 0 50px, rgba(255, 255, 255, 0.0666666667) 50px 51px);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+main .top .gallery-window .gallery .fullscreen-view img {
+  max-width: 50%;
+  max-height: 50vh;
+}
+main .top .gallery-window .gallery .fullscreen-view #closeFullscreen {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: rgb(254, 254, 254);
+  cursor: pointer;
+}
+main .top .gallery-window .gallery .fullscreen-view .nav {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+main .top .gallery-window .gallery .fullscreen-view .nav button {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  background-color: hsla(0, 0%, 100%, 0.8);
+  border: none;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+main .top .camera-window {
+  min-width: 30rem;
+  min-height: 25rem;
+}
+main .top .camera-window .upper {
+  background: hsla(0, 1%, 44%, 0.4);
+}
+main .top .camera-window .lower {
+  width: 100%;
+  height: 100%;
+  background-color: hsla(0, 0%, 0%, 0.623);
+  background-image: repeating-linear-gradient(to right, transparent 0 50px, rgba(255, 255, 255, 0.0666666667) 50px 51px), repeating-linear-gradient(to bottom, transparent 0 50px, rgba(255, 255, 255, 0.0666666667) 50px 51px);
+  padding: 1rem;
+  padding-bottom: 2.5rem;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+main .top .camera-window .camera-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+  height: 1005;
+}
+main .top .camera-window .camera-content .left video {
+  width: 100%;
+  height: 20rem;
+  background: black;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transform: scaleX(-1);
+}
+main .top .camera-window .camera-content .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+main .top .camera-window .camera-content .right button {
+  padding: 2.5rem 2.5rem;
+  border-radius: 50%;
+}
+main .top .camera-window .camera-content .right .preview img {
+  width: 80px;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 main .bottom {
   position: absolute;
   width: 100%;
@@ -661,6 +800,22 @@ main .bottom .task-bar .apps ul li:active {
 }
 main .bottom .task-bar .apps #main-menu img {
   width: 1.9rem;
+}
+main .bottom .task-bar .apps li {
+  position: relative;
+}
+main .bottom .task-bar .apps li.active::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background-color: white;
+  /* ya koi bhi line color */
+  border-radius: 2px;
 }
 main .menu-expand {
   position: absolute;

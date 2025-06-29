@@ -21,6 +21,7 @@
         <img class="back" src="./Assets/wal9.jpg" alt="" srcset="" />
 
         <div class="top">
+
             <div class="Date-Time">
                 <ul>
                     <li>
@@ -32,7 +33,7 @@
                 </ul>
             </div>
 
-            <div class="wallpaper-window window">
+            <div data-app="wallpaper" class="wallpaper-window window">
                 <div class="upper">
                     <div class="left">
                         <img src="./Assets/images.png" alt="" />
@@ -87,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="folder-window window">
+            <div data-app="folder" class="folder-window window">
                 <div class="upper">
                     <div class="left">
                         <img src="./Assets/folder.png" alt="" />
@@ -96,7 +97,7 @@
                     <div class="right">
                         <img src="./Assets/minimize-sign.png" alt="" />
                         <img src="./Assets/layers.png" alt="" />
-                        <img class="closeFolder" src="./Assets/close.png" alt="" />
+                        <img class="closeFolder close" src="./Assets/close.png" alt="" />
                     </div>
                 </div>
                 <div class="lower">
@@ -104,7 +105,7 @@
                 </div>
             </div>
 
-            <div class="calculator window">
+            <div data-app="calculator" class="calculator window">
                 <div class="upper">
                     <div class="left">
                         <img src="./Assets/calculator.png" alt="" />
@@ -159,7 +160,7 @@
                 </div>
             </div>
 
-            <div class="terminal window">
+            <div data-app="terminal" class="terminal window">
                 <div class="upper">
                     <div class="left">
                         <img src="./Assets/terminal.png" alt="" />
@@ -185,11 +186,11 @@
 
             <div class="main-menu-window">
                 <div class="apps">
-                    <div id="0" class="app-1 app">
+                    <div data-app="calculator" id="0" class="app-1 app">
                         <img src="./Assets/calculator.png" alt="" />
                         <p>calculator</p>
                     </div>
-                    <div id="1" class="app-2 app">
+                    <div data-app="wallpaper" id="1" class="app-2 app">
                         <img src="./Assets/images.png" alt="" />
                         <p>wallpaper</p>
                     </div>
@@ -205,11 +206,11 @@
                         <img src="./Assets/camera.png" alt="" />
                         <p>camera</p>
                     </div>
-                    <div id="5" class="app-6 app">
+                    <div data-app="terminal" id="5" class="app-6 app">
                         <img src="./Assets/terminal.png" alt="" />
                         <p>terminal</p>
                     </div>
-                    <div id="6" class="app-7 app">
+                    <div data-app="notes" id="6" class="app-7 app">
                         <img src="./Assets/post-it.png" alt="" />
                         <p>notes</p>
                     </div>
@@ -218,11 +219,11 @@
                         <p>map</p>
                     </div>
 
-                    <div id="8" class="app-9 app">
+                    <div data-app="chrome" id="8" class="app-9 app">
                         <img id="Google-search" src="./Assets/chrome.png" alt="" />
                         <p>chrome</p>
                     </div>
-                    <div id="9" class="app-10 app">
+                    <div data-app="music" id="9" class="app-10 app">
                         <img src="./Assets/music.png" alt="" />
                         <p>music</p>
                     </div>
@@ -230,18 +231,18 @@
                         <img src="./Assets/code.png" alt="" />
                         <p>code editor</p>
                     </div>
-                    <div id="11" class="app-11 app">
-                        <img src="./Assets/whatsapp.png" alt="" />
-                        <p>whatsapp</p>
+                    <div data-app="gallery" id="11" class="app-11 app">
+                        <img src="./Assets/gallery.png" alt="" />
+                        <p>Gallery</p>
                     </div>
-                    <div id="12" class="app-12 app">
+                    <div data-app="calander" id="12" class="app-12 app">
                         <img id="calander" src="./Assets/calendar.png" alt="" />
                         <p>calender</p>
                     </div>
                 </div>
             </div>
 
-            <div class="calender-window window">
+            <div data-app="calander" class="calender-window window">
                 <div class="upper">
                     <div class="left">
                         <img src="./Assets/calendar.png" alt="" />
@@ -280,7 +281,7 @@
                 </div>
             </div>
 
-            <div class="notes-window window">
+            <div data-app="notes" class="notes-window window">
                 <div class="upper">
                     <div class="left">
                         <img src="./Assets/post-it.png" alt="" />
@@ -303,7 +304,7 @@
                 </div>
             </div>
 
-            <div class="music-window window">
+            <div data-app="music" class="music-window window">
                 <div class="upper">
                     <div class="left">
                         <img src="./Assets/music.png" alt="" />
@@ -344,7 +345,7 @@
                 </div>
             </div>
 
-            <div class="google-search-window window">
+            <div data-app="chrome" class="google-search-window window">
                 <div class="upper">
                     <div class="left">
                         <img src="./Assets/chrome.png" alt="" />
@@ -361,6 +362,59 @@
                     <div class="gcse-search"></div>
                 </div>
             </div>
+
+            <div class="camera-window window" data-app="camera">
+                <div class="upper">
+                    <div class="left">
+                        <img src="./Assets/camera.png" alt="" />
+                    </div>
+
+                    <div class="right">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="closeFolder close" src="./Assets/close.png" alt="" />
+                    </div>
+                </div>
+                <div class="lower camera-content">
+                    <div class="left">
+                        <video id="camera" autoplay playsinline></video>
+                    </div>
+                    <div class="right">
+                        <button id="capture">Capture</button>
+                        <div class="preview"><img id="previewImage" src="" alt="preview"/></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="gallery-window window" data-app="gallery">
+                <div class="upper">
+                    <div class="left">
+                        <img src="./Assets/gallery.png" alt="" />
+                    </div>
+
+                    <div class="right">
+                        <img src="./Assets/minimize-sign.png" alt="" />
+                        <img src="./Assets/layers.png" alt="" />
+                        <img class="closeFolder close" src="./Assets/close.png" alt="" />
+                    </div>
+                </div>
+                <div class="lower gallery">
+                    <div class="thumbnails" id="thumbnails"></div>
+
+                    <div class="fullscreen-view" id="fullscreenView">
+                        <span id="closeFullscreen">✕</span>
+                        <img id="fullscreenImage" />
+                        <div class="nav">
+                            <button id="prevImage">⟨</button>
+                            <button id="nextImage">⟩</button>
+                        </div>
+                    </div>
+
+                    <h1>Capture Smile</h1>
+                </div>
+            </div>
+
         </div>
 
         <div class="bottom">
@@ -375,22 +429,22 @@
                 </div>
 
                 <div class="apps">
-                    <ul>
-                        <li><img src="./Assets/camera.png" alt="" srcset="" /></li>
-                        <li id="wallpaper">
+                    <ul id="taskbar-apps">
+                        <li id="CameraIcon" data-app="camera"><img src="./Assets/camera.png" alt="" srcset="" /></li>
+                        <li data-app="wallpaper" id="wallpaper">
                             <img src="./Assets/images.png" alt="" srcset="" />
                         </li>
-                        <li>
+                        <li data-app="calculator">
                             <img id="calculator" src="./Assets/calculator.png" alt="" srcset="" />
                         </li>
                         <li id="main-menu">
                             <img src="./Assets/main-menu.png" alt="" />
                         </li>
                         <li><img src="./Assets/map.png" alt="" /></li>
-                        <li id="NotesTaking">
+                        <li data-app="notes" id="NotesTaking">
                             <img src="./Assets/post-it.png" alt="" />
                         </li>
-                        <li id="Music-icon"><img src="./Assets/music.png" alt="" /></li>
+                        <li data-app="music" id="Music-icon"><img src="./Assets/music.png" alt="" /></li>
                     </ul>
                 </div>
 
