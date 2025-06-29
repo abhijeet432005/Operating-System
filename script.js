@@ -323,20 +323,73 @@ function addRemoveAppToTaskbar(appName, iconSrc) {
 
     taskbar.appendChild(li);
 
-    document.querySelectorAll(".close").forEach(closeBtn => {
-        closeBtn.addEventListener("click", () => {
-            const win = closeBtn.closest(".window");
-            if (!win) return;
+    const appWindow = document.querySelector(`.window[data-app="${appName}"]`);
+    const closeBtn = appWindow?.querySelector(".close");
 
-            const appName = win.dataset.app;
-            win.style.display = "none";
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            appWindow.style.display = "none";
 
             const icon = document.querySelector(`#taskbar-apps li[data-app="${appName}"]`);
             if (icon) icon.remove();
         });
-    });
+    }
 }
 
+function toggleTaskbarHighlight(appName, isActive) {
+    const taskbarIcon = document.querySelector(`.task-bar .apps li[data-app="${appName}"]`);
+    console.log(appName)
+    if (!taskbarIcon) return;
+
+    taskbarIcon.classList.toggle("active", isActive);
+}
+function appHighlightEffect() {
+
+    function showAppWindow(appName) {
+        const appWindow = document.querySelector(`.window[data-app="${appName}"]`);
+        if (!appWindow) return;
+
+        appWindow.style.display = "block";
+        ManagesZindexOfWindow(appWindow);
+        toggleTaskbarHighlight(appName, true);
+    }
+
+    function hideAppWindow(appName) {
+        const appWindow = document.querySelector(`.window[data-app="${appName}"]`);
+        if (!appWindow) return;
+
+        appWindow.style.display = "none";
+        toggleTaskbarHighlight(appName, false);
+    }
+
+    document.querySelectorAll(".window .close").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const parentWindow = btn.closest(".window");
+            if (!parentWindow) return;
+
+            const appName = parentWindow.dataset.app;
+            hideAppWindow(appName);
+        });
+    });
+
+    document.querySelectorAll(".app").forEach(app => {
+        app.addEventListener("click", () => {
+            const appName = app.dataset.app;
+            showAppWindow(appName);
+        });
+    });
+
+    document.querySelectorAll(".task-bar .apps li").forEach(icon => {
+        icon.addEventListener("click", () => {
+            const appName = icon.dataset.app;
+            showAppWindow(appName);
+        });
+    });
+
+}
+
+
+appHighlightEffect()
 
 
 
@@ -601,25 +654,28 @@ function RenameFolder() {
 RenameFolder()
 
 
+
+
 function folderOpenClose(folder) {
-    let open = document.querySelector(".folder-window")
-    const FolderWin = document.querySelector(`.window[data-app="folder]`)
+    let open = document.querySelector(".folder-window");
 
     folder.addEventListener("dblclick", () => {
-        // open.style.opacity = 1
-        open.style.display = 'block'
-        addRemoveAppToTaskbar("folder", "./Assets/folder.png")
-        ManagesZindexOfWindow()
-    })
+        open.style.display = 'block';
 
+        addRemoveAppToTaskbar("folder", "./Assets/folder.png"); // taskbar pe icon
+        ManagesZindexOfWindow(open); // z-index management
+        toggleTaskbarHighlight("folder", true); // highlight ON
+    });
 
     let close = document.querySelector(".closeFolder");
     if (close) {
         close.addEventListener("click", () => {
-            open.style.display = 'none'
+            open.style.display = 'none';
+            toggleTaskbarHighlight("folder", false); // highlight OFF
         });
     }
 }
+
 
 const folderWindow = document.querySelector(".folder-window");
 DragDrop(folderWindow);
@@ -823,63 +879,12 @@ DragDrop(ChromeWindow)
 
 
 
-function appHighlightEffect() {
-    function toggleTaskbarHighlight(appName, isActive) {
-        const taskbarIcon = document.querySelector(`.task-bar .apps li[data-app="${appName}"]`);
-        if (!taskbarIcon) return;
 
-        taskbarIcon.classList.toggle("active", isActive);
-    }
-
-    function showAppWindow(appName) {
-        const appWindow = document.querySelector(`.window[data-app="${appName}"]`);
-        if (!appWindow) return;
-
-        appWindow.style.display = "block";
-        ManagesZindexOfWindow(appWindow);
-        toggleTaskbarHighlight(appName, true);
-    }
-
-    function hideAppWindow(appName) {
-        const appWindow = document.querySelector(`.window[data-app="${appName}"]`);
-        if (!appWindow) return;
-
-        appWindow.style.display = "none";
-        toggleTaskbarHighlight(appName, false);
-    }
-
-    document.querySelectorAll(".window .close").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const parentWindow = btn.closest(".window");
-            if (!parentWindow) return;
-
-            const appName = parentWindow.dataset.app;
-            hideAppWindow(appName);
-        });
-    });
-
-    document.querySelectorAll(".app").forEach(app => {
-        app.addEventListener("click", () => {
-            const appName = app.dataset.app;
-            showAppWindow(appName);
-        });
-    });
-
-    document.querySelectorAll(".task-bar .apps li").forEach(icon => {
-        icon.addEventListener("click", () => {
-            const appName = icon.dataset.app;
-            showAppWindow(appName);
-        });
-    });
-
-}
-
-
-appHighlightEffect()
 
 let capturedImages = [];       // Shared with gallery
 let cameraStream = null;       // To manage start/stop stream
 let isCameraInitialized = false; // Flag to avoid duplicate init
+
 function CameraWrap() {
 
     function CameraFnc() {
