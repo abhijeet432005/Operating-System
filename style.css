@@ -618,6 +618,8 @@ main .top .google-search-window .lower {
 main .top .gallery-window {
   min-width: 40rem;
   min-height: 35rem;
+  /* Track */
+  /* Handle */
 }
 main .top .gallery-window .upper {
   background-color: hsla(0, 0%, 0%, 0.5);
@@ -639,9 +641,20 @@ main .top .gallery-window .lower h1 {
   font-weight: normal;
   z-index: -1;
 }
+main .top .gallery-window .lower::-webkit-scrollbar {
+  width: 8px;
+}
+main .top .gallery-window .lower::-webkit-scrollbar-track {
+  background: hsla(0, 0%, 100%, 0.1);
+}
+main .top .gallery-window .lower::-webkit-scrollbar-thumb {
+  background: hsla(0, 0%, 100%, 0.5);
+  border-radius: 1rem;
+}
 main .top .gallery-window .gallery {
   padding: 1rem;
   position: relative;
+  overflow: auto;
 }
 main .top .gallery-window .gallery .thumbnails {
   display: flex;

@@ -714,15 +714,34 @@ main {
                 }
             }
 
+            .lower::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            /* Track */
+            .lower::-webkit-scrollbar-track {
+                background: hsl(0, 0%, 100%, 0.1);
+            }
+
+            /* Handle */
+            .lower::-webkit-scrollbar-thumb {
+                background: hsl(0, 0%, 100%, 0.5);
+                border-radius: 1rem;
+            }
+
             .gallery {
                 padding: 1rem;
                 position: relative;
+                overflow: auto;
+
+
 
                 .thumbnails {
                     display: flex;
                     // justify-content: center;
                     flex-wrap: wrap;
                     gap: 10px;
+                    
                     
 
                     img {
