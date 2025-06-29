@@ -258,7 +258,7 @@ function MainMenuApplication() {
         document.querySelector(".wallpaper-window"), // id="1"
         null,                                        // id="2" (LinkedIn)
         null,                                        // id="3" (Weather)
-        null,                                        // id="4" (Camera)
+        document.querySelector(".camera-window"),                                        // id="4" (Camera)
         document.querySelector(".terminal"),        // id="5"
         document.querySelector(".notes-window"),   // id="6" (Notes)
         null,                                        // id="7" (Map)
@@ -338,11 +338,11 @@ function addRemoveAppToTaskbar(appName, iconSrc) {
 
 function toggleTaskbarHighlight(appName, isActive) {
     const taskbarIcon = document.querySelector(`.task-bar .apps li[data-app="${appName}"]`);
-    console.log(appName)
     if (!taskbarIcon) return;
 
     taskbarIcon.classList.toggle("active", isActive);
 }
+
 function appHighlightEffect() {
 
     function showAppWindow(appName) {
@@ -960,6 +960,13 @@ function CameraWrap() {
 
 
     document.getElementById("CameraIcon").addEventListener("click", () => {
+        let cameraWindow = document.querySelector(".camera-window");
+        cameraWindow.style.display = "block";
+        CameraFnc(); // Stream will restart only if not already running
+    });
+
+    document.getElementById("cameraicon").addEventListener("click", () => {
+        console.log("hii")
         let cameraWindow = document.querySelector(".camera-window");
         cameraWindow.style.display = "block";
         CameraFnc(); // Stream will restart only if not already running
