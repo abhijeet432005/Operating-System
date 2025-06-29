@@ -720,8 +720,10 @@ main {
 
                 .thumbnails {
                     display: flex;
+                    // justify-content: center;
                     flex-wrap: wrap;
                     gap: 10px;
+                    
 
                     img {
                         width: 10vw;
@@ -749,7 +751,7 @@ main {
                     flex-direction: column;
 
                     img {
-                        max-width: 50%;
+                        max-width: 70%;
                         max-height: 50vh;
                     }
 
@@ -783,8 +785,10 @@ main {
 
         .camera-window {
             // display: block;
-            min-width: 30rem;
+            min-width: 35rem;
             min-height: 25rem;
+            max-width: 45rem;
+            max-height: 35rem;
 
             .upper {
                 background: hsla(0, 1%, 44%, 0.4);
@@ -816,14 +820,23 @@ main {
                 justify-content: space-between;
                 padding: 1rem;
                 width: 100%;
-                height: 1005;
+                height: 100%;
+                position: relative;
+                overflow: hidden;
 
-                .left video {
-                    width: 100%;
-                    height: 20rem;
-                    background: black;
-                    object-fit: cover;
-                    transform: scaleX(-1);
+                .left {
+                    width: 40vw;
+                    height: 30vw;
+
+                    video{
+
+                        width: 100%;
+                        // height: 20rem;
+                        height: 100%;
+                        background: black;
+                        object-fit: cover;
+                        transform: scaleX(-1);
+                    }
                 }
 
                 .right {
@@ -831,16 +844,52 @@ main {
                     flex-direction: column;
                     align-items: center;
                     gap: 1rem;
+                    position: relative;
 
                     button {
                         padding: 2.5rem 2.5rem;
                         border-radius: 50%;
                     }
+                    .preview{
+                        display: none;
+                    }
 
+                
                     .preview img {
                         width: 80px;
                         height: 60px;
                         object-fit: cover;
+                    }
+
+                }
+                .openImage{
+                    width: 100%;
+                    height: 100%;
+                    background-color: hsl(0, 0%, 0%);
+                    color: rgb(255, 255, 255);
+                    position: absolute;
+                    // position: relative;
+                    display: none;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    
+                    img{
+                        width: 90%;
+                        height: 80%;
+                        object-fit: cover;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+
+                    }
+
+                    .Preview-close{
+                        position: absolute;
+                        right: 0.5vw;
+                        font-family: cursive;
+                        font-size: 1.5rem;
                     }
                 }
             }

@@ -887,6 +887,28 @@ function CameraWrap() {
         let captureBtn = document.getElementById("capture");
         let previewImage = document.getElementById("previewImage");
         let thumbnails = document.getElementById("thumbnails");
+        let preview = document.querySelector(".preview")
+        let openImage = document.querySelector(".openImage")
+        let PreviewClose = document.querySelector(".Preview-close")
+
+        captureBtn.addEventListener("click", () => {
+            preview.style.display = "block"
+        })
+        
+
+
+        preview.addEventListener("click", () => {
+            let imgSrc = document.getElementById("previewImage").getAttribute("src");
+
+            if (imgSrc) {
+                document.querySelector(".openImage img").setAttribute("src", imgSrc);
+                openImage.style.display = "block"; // Show the preview
+            }
+        });
+
+        PreviewClose.addEventListener("click", () => {
+            openImage.style.display = "none"; // Close the fullscreen image
+        });
 
         if (!cameraStream) {
             navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
