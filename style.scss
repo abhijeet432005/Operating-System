@@ -682,7 +682,7 @@ main {
         .gallery-window {
             // display: block;
             min-width: 40rem;
-            min-height: 30rem;
+            min-height: 35rem;
 
             .upper {
                 background-color: hsla(0, 0%, 0%, 0.5);
@@ -770,7 +770,7 @@ main {
                         button {
                             padding: 0.5rem 1rem;
                             font-size: 1.2rem;
-                            background-color: hsl(0, 0%, 100%, 0.8);
+                            background-color: hsla(0, 0%, 100%, 0.295);
                             border: none;
                             border-radius: 50%;
                             margin-bottom: 1rem;

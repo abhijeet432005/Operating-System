@@ -617,7 +617,7 @@ main .top .google-search-window .lower {
 }
 main .top .gallery-window {
   min-width: 40rem;
-  min-height: 30rem;
+  min-height: 35rem;
 }
 main .top .gallery-window .upper {
   background-color: hsla(0, 0%, 0%, 0.5);
@@ -687,7 +687,7 @@ main .top .gallery-window .gallery .fullscreen-view .nav {
 main .top .gallery-window .gallery .fullscreen-view .nav button {
   padding: 0.5rem 1rem;
   font-size: 1.2rem;
-  background-color: hsla(0, 0%, 100%, 0.8);
+  background-color: hsla(0, 0%, 100%, 0.295);
   border: none;
   border-radius: 50%;
   margin-bottom: 1rem;
