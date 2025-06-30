@@ -882,39 +882,59 @@ DragDrop(ChromeWindow)
 
 
 
-
-let capturedImages = [];       // Shared with gallery
-let cameraStream = null;       // To manage start/stop stream
-let isCameraInitialized = false; // Flag to avoid duplicate init
+let capturedImages = [];
+let cameraStream = null;
 
 function CameraWrap() {
-
     function CameraFnc() {
-        let camera = document.getElementById("camera");
-        let captureBtn = document.getElementById("capture");
-        let previewImage = document.getElementById("previewImage");
-        let thumbnails = document.getElementById("thumbnails");
-        let preview = document.querySelector(".preview")
-        let openImage = document.querySelector(".openImage")
-        let PreviewClose = document.querySelector(".Preview-close")
+        const camera = document.getElementById("camera");
+        const captureBtn = document.getElementById("capture");
+        const previewImage = document.getElementById("previewImage");
+        const thumbnails = document.getElementById("thumbnails");
+        const preview = document.querySelector(".preview");
+        const openImage = document.querySelector(".openImage");
+        const PreviewClose = document.querySelector(".Preview-close");
 
-        captureBtn.addEventListener("click", () => {
-            preview.style.display = "block"
-        })
+        // ⛔ Remove previous capture listener if any
+        captureBtn.removeEventListener("click", handleCapture);
+        // ✅ Add capture listener once
+        captureBtn.addEventListener("click", handleCapture);
 
+        function handleCapture() {
+            preview.style.display = "block";
 
+            const canvas = document.createElement("canvas");
+            canvas.width = camera.videoWidth;
+            canvas.height = camera.videoHeight;
+            const ctx = canvas.getContext("2d");
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+            ctx.drawImage(camera, 0, 0, canvas.width, canvas.height);
+
+            const imgURL = canvas.toDataURL();
+            previewImage.src = imgURL;
+
+            if (!capturedImages.includes(imgURL)) {
+                capturedImages.push(imgURL);
+
+                const thumb = document.createElement("img");
+                thumb.src = imgURL;
+                thumbnails.appendChild(thumb);
+
+                thumb.addEventListener("click", () => openFullscreen(capturedImages.indexOf(imgURL)));
+            }
+        }
 
         preview.addEventListener("click", () => {
-            let imgSrc = document.getElementById("previewImage").getAttribute("src");
-
+            let imgSrc = previewImage.getAttribute("src");
             if (imgSrc) {
-                document.querySelector(".openImage img").setAttribute("src", imgSrc);
-                openImage.style.display = "block"; // Show the preview
+                openImage.querySelector("img").setAttribute("src", imgSrc);
+                openImage.style.display = "block";
             }
         });
 
         PreviewClose.addEventListener("click", () => {
-            openImage.style.display = "none"; // Close the fullscreen image
+            openImage.style.display = "none";
         });
 
         if (!cameraStream) {
@@ -925,65 +945,38 @@ function CameraWrap() {
             });
         }
 
-        if (!isCameraInitialized) {
-            isCameraInitialized = true;
+        const cameraCloseBtn = document.querySelector(".camera-window .close");
+        cameraCloseBtn.addEventListener("click", () => {
+            document.querySelector(".camera-window").style.display = "none";
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+            }
 
-            captureBtn.addEventListener("click", () => {
-                const canvas = document.createElement("canvas");
-                canvas.width = camera.videoWidth;
-                canvas.height = camera.videoHeight;
-                const ctx = canvas.getContext("2d");
-                ctx.translate(canvas.width, 0);
-                ctx.scale(-1, 1);
-                ctx.drawImage(camera, 0, 0, canvas.width, canvas.height);
-
-                const imgURL = canvas.toDataURL();
-                previewImage.src = imgURL;
-
-                const thumb = document.createElement("img");
-                thumb.src = imgURL;
-                thumbnails.appendChild(thumb);
-
-                capturedImages.push(imgURL);
-                thumb.addEventListener("click", () => openFullscreen(capturedImages.indexOf(imgURL)));
-            });
-
-            let cameraCloseBtn = document.querySelector(".camera-window .close");
-            cameraCloseBtn.addEventListener("click", () => {
-                document.querySelector(".camera-window").style.display = "none";
-                if (cameraStream) {
-                    cameraStream.getTracks().forEach(track => track.stop());
-                    cameraStream = null;
-                    isCameraInitialized = false;
-                }
-            });
-        }
+            // ⛔ Remove listener when camera closed
+            captureBtn.removeEventListener("click", handleCapture);
+        });
     }
-
 
     ["CameraIcon", "cameraicon"].forEach(id => {
         document.getElementById(id)?.addEventListener("click", () => {
-            document.querySelector(".camera-window").style.display = "block"
-            CameraFnc()
-        })
-    })
+            document.querySelector(".camera-window").style.display = "block";
+            CameraFnc();
+        });
+    });
 
-
-    let cameraWindow = document.querySelector(".camera-window")
-    DragDrop(cameraWindow)
-
+    let cameraWindow = document.querySelector(".camera-window");
+    DragDrop(cameraWindow); // Your existing drag-drop logic
 }
 
-
-CameraWrap()
-
+CameraWrap();
 
 function galleryFnc() {
-    let fullscreen = document.getElementById("fullscreenView");
-    let fullscreenImg = document.getElementById("fullscreenImage");
-    let closeFullscreen = document.getElementById("closeFullscreen");
-    let prevImageBtn = document.getElementById("prevImage");
-    let nextImageBtn = document.getElementById("nextImage");
+    const fullscreen = document.getElementById("fullscreenView");
+    const fullscreenImg = document.getElementById("fullscreenImage");
+    const closeFullscreen = document.getElementById("closeFullscreen");
+    const prevImageBtn = document.getElementById("prevImage");
+    const nextImageBtn = document.getElementById("nextImage");
 
     let currentImageIndex = 0;
 
@@ -991,7 +984,7 @@ function galleryFnc() {
         currentImageIndex = index;
         fullscreenImg.src = capturedImages[index];
         fullscreen.style.display = "flex";
-    }
+    };
 
     closeFullscreen.addEventListener("click", () => {
         fullscreen.style.display = "none";
@@ -1007,7 +1000,10 @@ function galleryFnc() {
         fullscreenImg.src = capturedImages[currentImageIndex];
     });
 }
+
 galleryFnc();
+
+
 
 let galleryWindow = document.querySelector(".gallery-window")
 DragDrop(galleryWindow)
