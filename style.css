@@ -61,7 +61,6 @@ main .top {
 main .top .Date-Time {
   display: flex;
   justify-content: flex-end;
-  padding: 1rem;
 }
 main .top .Date-Time h1 {
   font-size: 1.25rem;

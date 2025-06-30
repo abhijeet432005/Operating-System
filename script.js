@@ -84,8 +84,10 @@ function Calendar() {
 Calendar()
 let CalendarWindow = document.querySelector(".calender-window")
 let openCalender = document.querySelector("#calander")
+let CalendarView = document.querySelector("#calander-view")
 DragDrop(CalendarWindow)
 OpenClose(openCalender, CalendarWindow)
+OpenClose(CalendarView, CalendarWindow)
 
 function refresh() {
     let refresh = document.querySelector("#Refresh")
@@ -959,18 +961,12 @@ function CameraWrap() {
     }
 
 
-    document.getElementById("CameraIcon").addEventListener("click", () => {
-        let cameraWindow = document.querySelector(".camera-window");
-        cameraWindow.style.display = "block";
-        CameraFnc(); // Stream will restart only if not already running
-    });
-
-    document.getElementById("cameraicon").addEventListener("click", () => {
-        console.log("hii")
-        let cameraWindow = document.querySelector(".camera-window");
-        cameraWindow.style.display = "block";
-        CameraFnc(); // Stream will restart only if not already running
-    });
+    ["cameraIcon", "cameraicon"].forEach(id => {
+        document.getElementById(id)?.addEventListener("click", () => {
+            document.querySelector(".camera-window").style.display = "block"
+            CameraFnc()
+        })
+    })
 
 
     let cameraWindow = document.querySelector(".camera-window")
