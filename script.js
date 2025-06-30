@@ -961,7 +961,7 @@ function CameraWrap() {
     }
 
 
-    ["cameraIcon", "cameraicon"].forEach(id => {
+    ["CameraIcon", "cameraicon"].forEach(id => {
         document.getElementById(id)?.addEventListener("click", () => {
             document.querySelector(".camera-window").style.display = "block"
             CameraFnc()
