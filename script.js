@@ -1010,3 +1010,44 @@ DragDrop(galleryWindow)
 
 
 
+const dock = document.querySelector(".doc-container");
+const items = dock.querySelectorAll("li");
+
+dock.addEventListener("mousemove", (e) => {
+  const mouseX = e.clientX;
+
+  items.forEach((item) => {
+    const rect = item.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const distance = Math.abs(mouseX - centerX);
+    const maxDistance = 90;
+
+    let scale = 1;
+
+    if (distance < maxDistance) {
+      scale = 1.5 - (distance / maxDistance) * 0.5; // range 1.5 to 1
+    }
+
+    const translateY = -(scale - 1) * 25;
+    item.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+    item.style.transition = "transform 0.1s ease-out";
+  });
+});
+
+dock.addEventListener("mouseleave", () => {
+  items.forEach((item) => {
+    item.style.transform = "scale(1) translateY(0)";
+  });
+});
+
+// ✅ Bounce effect on click
+items.forEach((item) => {
+  item.addEventListener("click", () => {
+    item.classList.remove("bounce");
+    void item.offsetWidth; // reflow to restart animation
+    item.classList.add("bounce");
+  });
+});
+
+
+

@@ -39,6 +39,46 @@ img {
 
 }
 
+// @keyframes loading {
+
+//     0%,
+//     100% {
+//         transform: translateY(0px);
+//     }
+
+//     60% {
+//         transform: translateY(-30px);
+//     }
+
+// }
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-15px);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    70% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.bounce {
+    animation: bounce 0.6s ease;
+}
+
+
 
 
 
@@ -95,6 +135,7 @@ main {
                     border-radius: 1rem;
                     padding: 1rem;
                     list-style: none;
+                    text-align: center;
                 }
             }
         }
@@ -847,7 +888,7 @@ main {
                     width: 40vw;
                     height: 30vw;
 
-                    video{
+                    video {
 
                         width: 100%;
                         // height: 20rem;
@@ -869,7 +910,8 @@ main {
                         padding: 2.5rem 2.5rem;
                         border-radius: 50%;
                     }
-                    .preview{
+
+                    .preview {
                         display: none;
                     }
 
@@ -881,7 +923,8 @@ main {
                     }
 
                 }
-                .openImage{
+
+                .openImage {
                     width: 100%;
                     height: 100%;
                     background-color: hsl(0, 0%, 0%);
@@ -893,7 +936,7 @@ main {
                     left: 50%;
                     transform: translate(-50%, -50%);
 
-                    img{
+                    img {
                         width: 90%;
                         height: 80%;
                         object-fit: cover;
@@ -904,7 +947,7 @@ main {
 
                     }
 
-                    .Preview-close{
+                    .Preview-close {
                         position: absolute;
                         right: 0.5vw;
                         font-family: cursive;
@@ -990,31 +1033,103 @@ main {
 
             }
 
+            // .apps {
+
+            //     transition: all ease 0.9s;
+            //     border-radius: 1rem;
+
+            //     ul{
+            //         li{
+            //             transition: 700ms cubic-bezier(0.075, 0.82, 0.165, 1);
+            //             transform-origin: bottom;
+
+            //         }
+            //         li.loading{
+            //             animation:  1s loading ease-in-out;
+            //         }
+
+            //         li:hover{
+            //             transform: translateY(-1rem);
+            //         }
+
+            //         .ve{
+            //             height: 80%;
+            //             width: 1px;
+
+            //         }
+
+            //     }
+
+
+            //     ul {
+
+
+            //         li:hover {
+            //             scale: 1.1;
+            //         }
+
+            //         li:active {
+            //             scale: 0.98;
+            //         }
+            //     }
+
+
+            //     #main-menu {
+
+            //         img {
+            //             width: 1.9rem;
+            //         }
+            //     }
+            // }
+
             .apps {
-
-                transition: all ease 0.9s;
-
+                position: fixed;
+                bottom: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 0.7rem 1rem;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 1.5rem;
+                backdrop-filter: blur(30px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+                z-index: 99;
+                transition: all 0.3s ease;
 
                 ul {
+                    display: flex;
+                    gap: 1.5rem;
 
+                    li {
+                        list-style: none;
+                        cursor: pointer;
+                        transition: transform 0.3s ease-in-out;
+                        transform-origin: bottom;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
 
-                    li:hover {
-                        scale: 1.1;
+                        img {
+                            width: 2.5rem;
+                            pointer-events: none;
+                        }
+
+                        &:hover {
+                            transform: translateY(-10px) scale(1.1);
+                        }
+
+                        &:active {
+                            transform: translateY(-5px) scale(0.9);
+                        }
                     }
 
-                    li:active {
-                        scale: 0.98;
-                    }
-                }
-
-
-                #main-menu {
-
-                    img {
-                        width: 1.9rem;
+                    .bounce {
+                        animation: bounce 0.5s ease;
                     }
                 }
             }
+
+
+
         }
 
 
@@ -1258,7 +1373,7 @@ main {
         }
     }
 
-    
+
 }
 
 
